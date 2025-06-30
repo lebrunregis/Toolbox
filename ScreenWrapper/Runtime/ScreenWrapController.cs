@@ -7,6 +7,7 @@ namespace ScreenWrap
     {
         public Camera m_camera;
         public ScreenBehaviour mode;
+        public Rect padding;
         private Rect screenRect;
         private Rigidbody2D rb;
 
@@ -139,7 +140,7 @@ namespace ScreenWrap
 
         private void Cleanup(Vector2 pos, Rect screenRect)
         {
-            if (pos.x < screenRect.x - 2f)
+            if (pos.x < screenRect.x)
             {
                 this.gameObject.SetActive(false);
             }
