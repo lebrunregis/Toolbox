@@ -24,16 +24,15 @@ public class SpawnerController : MonoBehaviour
         if (spawnDelta < 0)
         {
             spawnDelta = spawnTime;
-            GameObject particle = particlePool.GetFistAvailableObject();
+            GameObject particle = particlePool.GetFirstAvailableObject();
             if (particle != null)
             {
                 int angle = Random.Range(0, 359);
                 float dist = Random.Range(0, spawnRange);
                 particle.transform.position = transform.position + new Vector3(Mathf.Sin(angle) * dist, Mathf.Cos(angle) * dist, 0);
                 particle.SetActive(true);
-                ParticleController particleController = particle.GetComponent<ParticleController>();
-                particleController.GetTrail().Clear();
-                particleController.GetRigidbody().linearVelocity = particleVelocity;
+                Rigidbody rb = particle.GetComponent<Rigidbody>();
+                rb.linearVelocity = particleVelocity;
             }
         }
     }

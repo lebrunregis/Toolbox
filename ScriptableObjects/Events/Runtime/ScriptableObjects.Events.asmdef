@@ -1,6 +1,6 @@
 {
     "name": "ScriptableObjects.Events.Runtime",
-    "rootNamespace": "",
+    "rootNamespace": "ScriptableObjects.Events.Runtime",
     "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
