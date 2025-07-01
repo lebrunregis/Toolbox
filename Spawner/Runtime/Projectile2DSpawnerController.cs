@@ -3,7 +3,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(CircleRenderer))]
 [RequireComponent(typeof(GameObjectPool))]
-public class SpawnerController : MonoBehaviour
+public class Projectile2DSpawnerController : MonoBehaviour
 {
     public Vector2 particleVelocity = new Vector2(5, 0);
     private Tools.GameObjectPool particlePool;
@@ -24,7 +24,7 @@ public class SpawnerController : MonoBehaviour
         if (spawnDelta < 0)
         {
             spawnDelta = spawnTime;
-            GameObject particle = particlePool.GetFirstAvailableObject();
+            GameObject particle = particlePool.GetGameObject();
             if (particle != null)
             {
                 int angle = Random.Range(0, 359);

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Tools
 {
-    public class GameObjectPool : MonoBehaviour
+    public class GameObjectPool : MonoBehaviour, IPool
     {
         public GameObject prefab;
         public int poolIncrement = 20;
@@ -26,13 +26,7 @@ namespace Tools
             }
         }
 
-        // Update is called once per frame
-        private void Update()
-        {
-
-        }
-
-        public GameObject GetFirstAvailableObject()
+        public GameObject GetGameObject()
         {
             GameObject go = null;
             LinkedListNode<GameObject> node = list.First;
