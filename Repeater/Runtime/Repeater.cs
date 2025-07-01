@@ -8,19 +8,13 @@ namespace Tools
         public UnityEvent m_OnStartupEnd = new();
         public UnityEvent m_OnRepeat = new();
 
-        public float startupTime = 0;
+        public float startupTime = 3;
         public float repeatTime = 1;
 
         private float repeatDelta = 0;
         private float startupDelta = 1;
+        [Tooltip("Infinite if negative, disables itself if zero.")]
         public int repeatCount = 0;
-        public bool loopForever = true;
-
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
-        private void Start()
-        {
-
-        }
 
         private void OnEnable()
         {
@@ -37,13 +31,18 @@ namespace Tools
                 {
                     repeatDelta = repeatTime;
                     m_OnRepeat.Invoke();
-                    if (!loopForever)
+
+                    if (repeatCount < 0)
+                    {
+                        Debug.Log("Repeating forever");
+                    }
+                    else if (repeatCount == 0)
+                    {
+                        this.enabled = false;
+                    }
+                    else
                     {
                         repeatCount--;
-                        if (repeatCount < 0)
-                        {
-                            this.enabled = false;
-                        }
                     }
                 }
                 else
@@ -51,7 +50,6 @@ namespace Tools
                     repeatDelta -= Time.deltaTime;
 
                 }
-
             }
             else
             {

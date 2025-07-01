@@ -14,7 +14,7 @@ public class SpawnerController<T> : MonoBehaviour where T : IPool
     private Repeater repeater;
     public float pushForce = 0;
     public float spawnSpread = 0;
-    public int furthestSpawnRandomRange = 0;
+    public int furthestSpawnRange = 0;
     public Vector2 initialVelocity = Vector2.zero;
     public SpawnerEnum.SpawnBehavior spawnBehavior = SpawnerEnum.SpawnBehavior.Random;
 
@@ -23,7 +23,7 @@ public class SpawnerController<T> : MonoBehaviour where T : IPool
     {
         repeater = GetComponent<Repeater>();
         repeater.enabled = false;
-        
+
     }
 
     public void OnEnable()
@@ -126,9 +126,9 @@ public class SpawnerController<T> : MonoBehaviour where T : IPool
             i++;
         } while (i < spawnLocations.Count);
 
-        if (furthestSpawnRandomRange > 0)
+        if (furthestSpawnRange > 0)
         {
-            furthestSpawnPoint = (furthestSpawnPoint + Random.Range(-furthestSpawnRandomRange, furthestSpawnRandomRange)) % spawnLocations.Count;
+            furthestSpawnPoint = (furthestSpawnPoint + Random.Range(-furthestSpawnRange, furthestSpawnRange)) % spawnLocations.Count;
         }
         return furthestSpawnPoint;
     }
