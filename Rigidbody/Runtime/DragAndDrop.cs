@@ -78,7 +78,7 @@ public class DragAndDrop : MonoBehaviour
         {
             heldObj = pickedObject;
             heldObjRB = rb;
-            rb.useGravity = false; 
+            rb.useGravity = false;
             tempDamping = heldObjRB.linearDamping;
             heldObjRB.linearDamping = heldLinearDamping;
             heldObjRB.constraints = holdAreaConstraints;
