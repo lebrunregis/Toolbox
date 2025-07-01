@@ -1,3 +1,4 @@
+using ConveyorBeltScript.Runtime;
 using UnityEngine;
 using static UnityEngine.InputSystem.InputAction;
 
@@ -18,12 +19,6 @@ public class DragAndDrop : MonoBehaviour
 
     #region Unity Api
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    private void Start()
-    {
-
-    }
-
     // Update is called once per frame
     private void FixedUpdate()
     {
@@ -39,6 +34,7 @@ public class DragAndDrop : MonoBehaviour
     #region Main Methods
     public void OnGrab(CallbackContext context)
     {
+        Debug.Log("Grabbed object");
         if (context.performed == true)
         {
             OnGrabButtonPressed();
@@ -50,12 +46,22 @@ public class DragAndDrop : MonoBehaviour
     }
     private void OnGrabButtonPressed()
     {
+        Debug.Log("Trying to grab something");
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, pickupRange))
         {
-            holding = true;
-            PickupObject(hit.transform.gameObject);
+            if (hit.rigidbody.gameObject.TryGetComponent<Grabable>(out Grabable grab))
+            {
+                heldObjGrabableComponent = grab;
+                grab.grabbed = true;
+                holding = true;
+                PickupObject(hit.transform.gameObject);
+            }
+            else
+            {
+                Debug.LogWarning("Tried to grab an object but it did not contain a grabable component!");
+            }
         }
     }
 
@@ -91,7 +97,9 @@ public class DragAndDrop : MonoBehaviour
         heldObjRB.useGravity = true;
         heldObjRB.linearDamping = tempDamping;
         heldObjRB.constraints = RigidbodyConstraints.None;
+        heldObjGrabableComponent.grabbed = false;
 
+        heldObjGrabableComponent = null;
         heldObjRB.transform.parent = null;
         heldObj = null;
     }
@@ -113,6 +121,7 @@ public class DragAndDrop : MonoBehaviour
     #region Private and Protected
     private GameObject heldObj;
     private Rigidbody heldObjRB;
+    private Grabable heldObjGrabableComponent;
     private bool holding;
     private float tempDamping;
     #endregion

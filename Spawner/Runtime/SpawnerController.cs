@@ -23,7 +23,7 @@ public class SpawnerController<T> : MonoBehaviour where T : IPool
     {
         repeater = GetComponent<Repeater>();
         repeater.enabled = false;
-
+        //repeater.m_OnRepeat.AddListener();
     }
 
     public void OnEnable()
@@ -85,6 +85,7 @@ public class SpawnerController<T> : MonoBehaviour where T : IPool
 
             go.SetActive(true);
             ApplyRigibodySettings(go);
+            Debug.Log("Activating gameObject");
         }
         else
         {
@@ -142,6 +143,8 @@ public class SpawnerController<T> : MonoBehaviour where T : IPool
     private void SpawnObjectAtSpawn(GameObject go, int spawnId)
     {
         go.transform.position = spawnLocations[spawnId].position + new Vector3(Random.Range(-spawnSpread, spawnSpread), Random.Range(-spawnSpread, spawnSpread), 0);
+
+        Debug.Log("Activated spawned object");
         go.SetActive(true);
     }
 }

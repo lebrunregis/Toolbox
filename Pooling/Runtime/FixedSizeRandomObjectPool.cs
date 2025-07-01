@@ -11,10 +11,12 @@ namespace Tools
         {
             LinkedList<int> availableObjects = new();
             GameObject foundObject = null;
-            for (int i = 0; i < availableObjects.Count; i++)
+            for (int i = 0; i < prefabs.Count; i++)
             {
-                if (prefabs[i].gameObject.activeSelf)
+                //Debug.Log("Testing " + prefabs[i].name);
+                if (!prefabs[i].activeSelf)
                 {
+                    //Debug.Log("Adding gameobject to list");
                     availableObjects.AddLast(i);
                 }
             }
@@ -24,6 +26,8 @@ namespace Tools
                 int pos = Random.Range(0, availableObjects.Count);
                 foundObject = prefabs[pos];
             }
+
+            // Debug.Log("Available objects :" + availableObjects.Count );
             return foundObject;
         }
     }
