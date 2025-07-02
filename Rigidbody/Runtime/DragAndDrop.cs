@@ -5,6 +5,14 @@ using static UnityEngine.InputSystem.InputAction;
 public class DragAndDrop : MonoBehaviour
 {
     #region Publics
+
+    public Texture2D cursorTextureDefault;
+    public Vector2 hotSpotDefault = Vector2.zero;
+    public Texture2D cursorTextureEnabled;
+    public Vector2 hotSpotEnabled = Vector2.zero;
+
+    public CursorMode cursorMode = CursorMode.Auto;
+
     [Header("Pickup settings")]
     public RigidbodyConstraints holdAreaConstraints;
     public RigidbodyConstraints releaseAreaConstraints;
@@ -19,6 +27,28 @@ public class DragAndDrop : MonoBehaviour
 
 
     #region Unity Api
+        private void OnEnable()
+    {
+            Cursor.SetCursor(cursorTextureDefault, hotSpotDefault, cursorMode);
+    }
+
+    private void Update()
+    {
+        Debug.Log("Trying to grab something");
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, pickupRange))
+        {
+            if (hit.rigidbody.gameObject.TryGetComponent<Grabable>(out Grabable grab))
+            {
+                Cursor.SetCursor(cursorTextureEnabled, hotSpotEnabled, cursorMode);
+            }
+            else
+            {
+                Cursor.SetCursor(cursorTextureDefault, hotSpotDefault, cursorMode);
+            }
+        }
+    }
 
     // Update is called once per frame
     private void FixedUpdate()
