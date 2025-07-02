@@ -44,7 +44,7 @@ public class DragAndDrop : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, pickupRange))
         {
-            
+
             if (hit.collider.gameObject.TryGetComponent<Grabable>(out Grabable grab))
             {
                 SetCursorState(CursorStates.Enabled);
