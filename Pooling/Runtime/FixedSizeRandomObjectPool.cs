@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Tools
@@ -24,7 +25,7 @@ namespace Tools
             if (availableObjects.Count > 0)
             {
                 int pos = Random.Range(0, availableObjects.Count);
-                foundObject = prefabs[pos];
+                foundObject = prefabs[availableObjects.ElementAt(pos)];
             }
 
             // Debug.Log("Available objects :" + availableObjects.Count );
