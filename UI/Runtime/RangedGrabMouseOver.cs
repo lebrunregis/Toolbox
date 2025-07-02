@@ -3,18 +3,18 @@ using UnityEngine;
 public class RangedGrabMouseOver : MonoBehaviour
 {
     // Attach this script to a GameObject with a Collider, then mouse over the object to see your cursor change.
-    public Texture2D cursorTextureDefault; 
+    public Texture2D cursorTextureDefault;
     public Vector2 hotSpotDefault = Vector2.zero;
     public Texture2D cursorTextureEnabled;
-        public Vector2 hotSpotEnabled = Vector2.zero;
-    
+    public Vector2 hotSpotEnabled = Vector2.zero;
+
     public CursorMode cursorMode = CursorMode.Auto;
 
 
 
     private void OnMouseEnter()
     {
-      //  Cursor.SetCursor(cursorTextureDefault, hotSpot, cursorMode);
+        //  Cursor.SetCursor(cursorTextureDefault, hotSpot, cursorMode);
     }
 
     private void OnMouseOver()
@@ -30,7 +30,7 @@ public class RangedGrabMouseOver : MonoBehaviour
 
     private void OnMouseDown()
     {
-      //  Cursor.SetCursor(cursorTextureDefault, hotSpot, cursorMode);
+        //  Cursor.SetCursor(cursorTextureDefault, hotSpot, cursorMode);
     }
 
     private void OnMouseUp()

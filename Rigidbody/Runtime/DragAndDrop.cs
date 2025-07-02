@@ -10,6 +10,12 @@ public class DragAndDrop : MonoBehaviour
     public Vector2 hotSpotDefault = Vector2.zero;
     public Texture2D cursorTextureEnabled;
     public Vector2 hotSpotEnabled = Vector2.zero;
+    public CursorStates currentState = CursorStates.Default;
+    public enum CursorStates
+    {
+        Default,
+        Enabled
+    }
 
     public CursorMode cursorMode = CursorMode.Auto;
 
@@ -27,29 +33,50 @@ public class DragAndDrop : MonoBehaviour
 
 
     #region Unity Api
-        private void OnEnable()
+    private void OnEnable()
     {
-            Cursor.SetCursor(cursorTextureDefault, hotSpotDefault, cursorMode);
+        Cursor.SetCursor(cursorTextureDefault, hotSpotDefault, cursorMode);
     }
 
     private void Update()
     {
-        Debug.Log("Trying to grab something");
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, pickupRange))
         {
-            if (hit.rigidbody.gameObject.TryGetComponent<Grabable>(out Grabable grab))
+            
+            if (hit.collider.gameObject.TryGetComponent<Grabable>(out Grabable grab))
             {
-                Cursor.SetCursor(cursorTextureEnabled, hotSpotEnabled, cursorMode);
+                SetCursorState(CursorStates.Enabled);
             }
             else
             {
-                Cursor.SetCursor(cursorTextureDefault, hotSpotDefault, cursorMode);
+                SetCursorState(CursorStates.Default);
             }
+        }
+        else
+        {
+            SetCursorState(CursorStates.Default);
         }
     }
 
+    private void SetCursorState(CursorStates state)
+    {
+        if (state != currentState)
+        {
+            currentState = state;
+            switch (currentState)
+            {
+                case CursorStates.Enabled:
+                    Cursor.SetCursor(cursorTextureEnabled, hotSpotEnabled, cursorMode);
+                    break;
+                case CursorStates.Default:
+                    Cursor.SetCursor(cursorTextureDefault, hotSpotDefault, cursorMode);
+                    break;
+            }
+        }
+
+    }
     // Update is called once per frame
     private void FixedUpdate()
     {
