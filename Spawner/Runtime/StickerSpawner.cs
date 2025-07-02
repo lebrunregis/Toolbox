@@ -1,13 +1,17 @@
 using LayerChangeCoffin.Runtime;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
+using static UnityEditor.PlayerSettings;
 
 [RequireComponent(typeof(LayerChanger))]
 public class StickerSpawner : MonoBehaviour
 {
-    Vector3 placementBaseAngle = new(0, 0, 0);
-    Vector3 placementRange = new(90, 90, 90);
+    public Vector3 placementBaseAngle = new(0, 0, 0);
+    public Vector3 placementRange = new(90, 90, 90);
     public int raycastDistance = 3;
+    public Transform raycastSource;
 
     public int StickerAmountFactor = 5;
     public int stickersToSpawn;
@@ -61,22 +65,36 @@ public class StickerSpawner : MonoBehaviour
             angle.x = Random.Range(placementRange.x, -placementRange.x) + placementBaseAngle.x;
             angle.y = Random.Range(placementRange.y, -placementRange.y) + placementBaseAngle.y;
             angle.z = Random.Range(placementRange.z, -placementRange.z) + placementBaseAngle.z;
-            Vector3 fromPosition = transform.position + angle * raycastDistance;
-            Vector3 toPosition = transform.position;
-            Vector3 direction = toPosition - fromPosition;
-            if (Physics.Raycast(toPosition, direction, out RaycastHit hit, raycastDistance, layerAsLayerMask))
+
+            raycastSource.position = transform.position;
+            raycastSource.rotation = transform.rotation;
+            raycastSource.rotation *= Quaternion.Euler(angle);
+            raycastSource.position += raycastSource.transform.forward * raycastDistance;
+            Vector3 direction = (transform.position - raycastSource.position).normalized;
+            RaycastHit[] hits = Physics.RaycastAll(raycastSource.position, direction, raycastDistance, layerAsLayerMask);
+
+            foreach (RaycastHit hit in hits)
             {
-                int stickerIndex = Random.Range(0, stickers.Count - 1);
-                GameObject instance = Instantiate(stickers[stickerIndex]);
-                instance.transform.SetParent(transform);
-                instance.transform.position = hit.point;
-                instance.transform.rotation = Quaternion.Euler(hit.normal);
-                instance.SetActive(true);
-            }
-            else
-            {
-                Debug.Log("Sticker raycast didn't hit!");
+                if (hit.collider.gameObject == transform.gameObject)
+                {
+                    Debug.Log("Hit found, placing sticker");
+                    int stickerIndex = Random.Range(0, stickers.Count - 1);
+                    GameObject instance = Instantiate(stickers[stickerIndex]);
+                    instance.transform.SetParent(transform);
+                    instance.transform.position = hit.point;
+                    instance.transform.rotation = Quaternion.Euler(hit.normal);
+                    instance.SetActive(true);
+                }
             }
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        // Set the color with custom alpha.
+        Gizmos.color = new Color(0f, 1f, 0f, 1f); // Green with custom alpha
+        Vector3 direction = (transform.position - raycastSource.position).normalized;
+        // Draw the ray.
+        Gizmos.DrawRay(raycastSource.position, direction * raycastDistance);
     }
 }
