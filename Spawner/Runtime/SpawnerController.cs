@@ -23,7 +23,7 @@ public class SpawnerController<T> : MonoBehaviour where T : IPool
     {
         repeater = GetComponent<Repeater>();
         repeater.enabled = false;
-        //repeater.m_OnRepeat.AddListener();
+        repeater.m_OnRepeat.AddListener(SpawnObject);
     }
 
     public void OnEnable()
