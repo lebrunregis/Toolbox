@@ -7,6 +7,7 @@ public class DragAndDrop : MonoBehaviour
     #region Publics
     [Header("Pickup settings")]
     public RigidbodyConstraints holdAreaConstraints;
+    public RigidbodyConstraints releaseAreaConstraints;
 
     [Header("Physics Parameters")]
     [SerializeField] public float holdRange = 2.0f;
@@ -88,7 +89,6 @@ public class DragAndDrop : MonoBehaviour
             tempDamping = heldObjRB.linearDamping;
             heldObjRB.linearDamping = heldLinearDamping;
             heldObjRB.constraints = holdAreaConstraints;
-
         }
     }
 
@@ -96,7 +96,7 @@ public class DragAndDrop : MonoBehaviour
     {
         heldObjRB.useGravity = true;
         heldObjRB.linearDamping = tempDamping;
-        heldObjRB.constraints = RigidbodyConstraints.None;
+        heldObjRB.constraints = releaseAreaConstraints;
         heldObjGrabableComponent.grabbed = false;
 
         heldObjGrabableComponent = null;
