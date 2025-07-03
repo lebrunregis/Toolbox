@@ -20,7 +20,7 @@ public class OutlineContainer : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (deltaDisable > 0)
+        if (deltaDisable >= 0)
         {
             deltaDisable -= Time.deltaTime;
             if(deltaDisable < 0)
@@ -41,7 +41,11 @@ public class OutlineContainer : MonoBehaviour
     #region Main Methods
     public void EnableOutlineWithTimer()
     {
-        outline.SetActive(true);
+        if(deltaDisable <= 0)
+        {
+            outline.SetActive(true);
+        }
+      
         deltaDisable = disableTime;
     }
     #endregion
