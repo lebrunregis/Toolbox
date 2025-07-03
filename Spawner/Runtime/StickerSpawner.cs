@@ -8,8 +8,8 @@ using static UnityEditor.PlayerSettings;
 [RequireComponent(typeof(LayerChanger))]
 public class StickerSpawner : MonoBehaviour
 {
-    public Vector3 placementBaseAngle = new(0, 0, 0);
-    public Vector3 placementRange = new(90, 90, 90);
+    public Vector3 placementBaseAngle = new(180, 0, 0);
+    public Vector3 placementRange = new(45, 45, 0);
     public int raycastDistance = 3;
     public Transform raycastSource;
 
