@@ -15,7 +15,8 @@ public class ZfightingSolver : MonoBehaviour
 
         Vector3 pos = transform.position;
         pos.z += Random.Range(0.0f, 0.02f);
-        transform.position = pos;
+        Debug.Log("New z:" +  pos.z);
+        transform.position.Set(pos.x,pos.y,pos.z);
     }
 
     // Update is called once per frame
