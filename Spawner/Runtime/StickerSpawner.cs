@@ -1,9 +1,6 @@
-using LayerChangeCoffin.Runtime;
 using System.Collections.Generic;
-using Unity.VisualScripting;
+using LayerChangeCoffin.Runtime;
 using UnityEngine;
-using UnityEngine.UIElements;
-using static UnityEditor.PlayerSettings;
 
 [RequireComponent(typeof(LayerChanger))]
 public class StickerSpawner : MonoBehaviour
@@ -66,12 +63,14 @@ public class StickerSpawner : MonoBehaviour
             angle.y = Random.Range(placementRange.y, -placementRange.y) + placementBaseAngle.y;
             angle.z = Random.Range(placementRange.z, -placementRange.z) + placementBaseAngle.z;
 
-            raycastSource.position = transform.position;
-            raycastSource.rotation = transform.rotation;
+            raycastSource.SetPositionAndRotation(transform.position, transform.rotation);
             raycastSource.rotation *= Quaternion.Euler(angle);
             raycastSource.position += raycastSource.transform.forward * raycastDistance;
             Vector3 direction = (transform.position - raycastSource.position).normalized;
-            RaycastHit[] hits = Physics.RaycastAll(raycastSource.position, direction, raycastDistance, layerAsLayerMask);
+            RaycastHit[] hits = Physics.RaycastAll(raycastSource.position,
+                                                   direction,
+                                                   raycastDistance,
+                                                   layerAsLayerMask);
 
             foreach (RaycastHit hit in hits)
             {
@@ -82,7 +81,7 @@ public class StickerSpawner : MonoBehaviour
                     GameObject instance = Instantiate(stickers[stickerIndex]);
                     instance.transform.SetParent(transform);
                     instance.transform.position = hit.point;
-                    instance.transform.rotation = Quaternion.Euler(hit.normal);
+                    instance.transform.rotation = Quaternion.LookRotation(hit.normal);
                     instance.SetActive(true);
                 }
             }

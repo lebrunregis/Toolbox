@@ -143,7 +143,7 @@ public class SpawnerController<T> : MonoBehaviour where T : IPool
     private void SpawnObjectAtSpawn(GameObject go, int spawnId)
     {
         go.transform.position = spawnLocations[spawnId].position + new Vector3(Random.Range(-spawnSpread, spawnSpread), Random.Range(-spawnSpread, spawnSpread), 0);
-
+        go.transform.rotation = spawnLocations[spawnId].rotation;
         Debug.Log("Activated spawned object");
         go.SetActive(true);
     }
