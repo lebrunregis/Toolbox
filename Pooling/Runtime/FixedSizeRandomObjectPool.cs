@@ -10,8 +10,9 @@ namespace Tools
 
         private void Start()
         {
-            for (int i = 0; i < transform.childCount; i++) {
-                        prefabs.Add(transform.GetChild(i).gameObject);
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                prefabs.Add(transform.GetChild(i).gameObject);
             }
         }
 

@@ -44,8 +44,18 @@ public class DragAndDrop : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, pickupRange))
         {
+            GameObject go = hit.collider.gameObject;
 
-            if (hit.collider.gameObject.TryGetComponent<Grabable>(out Grabable grab))
+            if (go.TryGetComponent<OutlineContainer>(out OutlineContainer OLcontainer))
+            {
+                OLcontainer.EnableOutlineWithTimer();
+                Debug.Log("ENABLED OUTLINE");
+            } else
+            {
+                Debug.Log("NO OUTLINE FOUND");
+            }
+
+            if (go.TryGetComponent<Grabable>(out Grabable grab))
             {
                 SetCursorState(CursorStates.Enabled);
             }
@@ -58,6 +68,11 @@ public class DragAndDrop : MonoBehaviour
         {
             SetCursorState(CursorStates.Default);
         }
+    }
+
+    private void SetOutLine()
+    {
+
     }
 
     private void SetCursorState(CursorStates state)
