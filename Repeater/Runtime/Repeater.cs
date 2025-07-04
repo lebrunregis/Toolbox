@@ -34,7 +34,7 @@ namespace Tools
 
                     if (repeatCount < 0)
                     {
-                        Debug.Log("Repeating forever");
+                   //     Debug.Log("Repeating forever");
                     }
                     else if (repeatCount == 0)
                     {
