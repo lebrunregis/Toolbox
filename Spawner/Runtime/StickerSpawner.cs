@@ -1,8 +1,6 @@
 using System.Collections.Generic;
-using LayerChangeCoffin.Runtime;
 using UnityEngine;
 
-[RequireComponent(typeof(LayerChanger))]
 public class StickerSpawner : MonoBehaviour
 {
     public Vector3 placementBaseAngle = new(180, 0, 0);
@@ -12,29 +10,13 @@ public class StickerSpawner : MonoBehaviour
 
     public int StickerAmountFactor = 5;
     public int stickersToSpawn;
-    public List<GameObject> goodStickers = new();
-    public List<GameObject> evilStickers = new();
+    public List<GameObject> stickerPrefabs = new();
     public List<GameObject> spawnedStickers = new();
 
     private void OnEnable()
     {
-        LayerChanger layerChanger = GetComponent<LayerChanger>();
-        layerChanger.enabled = true;
-        stickersToSpawn = Random.Range(1, StickerAmountFactor) * 2 + 1;
-        int goodStickersAmount = Random.Range(0, stickersToSpawn);
-        int badStickersAmount = stickersToSpawn - goodStickersAmount;
-        SpawnStickers(goodStickersAmount, goodStickers);
-        SpawnStickers(badStickersAmount, evilStickers);
-
-        if (goodStickersAmount > badStickersAmount)
-        {
-            layerChanger.SetType(LayerChanger.CoffinType.Good);
-        }
-        else
-        {
-            layerChanger.SetType(LayerChanger.CoffinType.Evil);
-        }
-
+        int stickerAmount = Random.Range(1, StickerAmountFactor) * 2 + 1;
+        SpawnStickers(stickerAmount, stickerPrefabs);
     }
 
     private void OnDisable()

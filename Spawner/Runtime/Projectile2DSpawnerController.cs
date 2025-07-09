@@ -31,7 +31,7 @@ public class Projectile2DSpawnerController : MonoBehaviour
                 float dist = Random.Range(0, spawnRange);
                 particle.transform.position = transform.position + new Vector3(Mathf.Sin(angle) * dist, Mathf.Cos(angle) * dist, 0);
                 particle.SetActive(true);
-                Rigidbody rb = particle.GetComponent<Rigidbody>();
+                UnityEngine.Rigidbody rb = particle.GetComponent<UnityEngine.Rigidbody>();
                 rb.linearVelocity = particleVelocity;
             }
         }

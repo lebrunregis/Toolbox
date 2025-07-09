@@ -23,7 +23,7 @@ public class OutlineContainer : MonoBehaviour
         if (deltaDisable >= 0)
         {
             deltaDisable -= Time.deltaTime;
-            if(deltaDisable < 0)
+            if (deltaDisable < 0)
             {
                 outline.SetActive(false);
             }
@@ -41,11 +41,11 @@ public class OutlineContainer : MonoBehaviour
     #region Main Methods
     public void EnableOutlineWithTimer()
     {
-        if(deltaDisable <= 0)
+        if (deltaDisable <= 0)
         {
             outline.SetActive(true);
         }
-      
+
         deltaDisable = disableTime;
     }
     #endregion

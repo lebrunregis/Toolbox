@@ -1,13 +1,13 @@
 using UnityEngine;
 
-namespace ScreenWrap
+namespace ScreenWrapper.Runtime
 {
     [RequireComponent(typeof(Rigidbody2D))]
     public class ScreenWrapController : MonoBehaviour
     {
         public Camera m_camera;
         public ScreenBehaviour mode;
-        public Rect padding;
+        public Rect padding; //unimplemented
         private Rect screenRect;
         private Rigidbody2D rb;
 
