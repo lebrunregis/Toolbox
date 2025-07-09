@@ -1,0 +1,508 @@
+-C#
+	OOP
+		Code
+		Variable types
+		Declaration keywords
+		Methods
+		Loops
+		property
+		conditions
+		namespace
+		events
+		error handling
+	object
+		inheritance
+		access modifier
+		linear algebra
+	vector
+		addition 
+		substract 	
+		scale
+		scalar
+		magnitude
+	matrix 
+		translation 
+		rotation 
+		scaling
+		 multiplication
+		 inversion	
+		 transposition
+
+popular operations
+	lerp
+	slerp
+	smoothStep
+	Distance
+	Square Distance
+	Dot product
+	Cross product
+	remap
+	quaternion
+triginometry
+	sis
+	cos
+	tan
+	radiant
+physics
+	velocite 
+	acceletation 
+	force
+	newton's third law
+unity 
+	editor
+	window
+	console
+	inspector
+	scene
+	project view 
+	hierarchy
+	profiler
+	Gameobject
+	Transform
+	component
+	Built-in component
+physics
+	Rigidbody
+	Collider
+	Character Controller
+	Joints
+Mesh
+	Mesh Filter
+	Mesh Renderer
+	Skinned MeshRenderer
+-Effects
+	ParticleSystem
+	LineRenderer
+	TrailRenderer
+-Audio
+	AudioSource
+	AudioListener
+UI
+	Canvas
+	RectTransform
+	Anchors
+	LayoutGroups
+	TextMeshPro
+Light
+	ReflectionProbes
+	LightProbeGroup
+	Tag & Layers
+Animator
+	Animation State
+	Animator Layers
+	Animation Clip
+	Animation Events
+	Rigging
+	RootMotion
+	Reverse Kinematic
+Unity Assets
+	Prefabs
+	Scènes Materials
+	Textures
+	Sprites
+	Audio
+Unity Special FOLDER
+	Resources
+	Editor
+	StreamingAssets
+	Plugins
+Code
+	Visual Scripting
+	Physics
+	Rigidbody.AddForce
+	Raycast
+	OnCollisionEnter/Exit
+	OnTriggerEnter/Exit
+	PlayerPrefs
+	Loading D'assets
+	Instantiate
+	Ressources.Load
+SceneManager.LoadScene(additive)
+InputManager/InputSystem
+Time
+TimeScale
+DeltaTime
+Monobehaviour
+transform
+gameobject
+find
+serializefiald
+getcomponent
+unity lifecycle
+awake
+start
+update
+fixedupdate
+lateupdate
+ondisable
+onenable
+Advanced coding
+extension methods
+tuples
+attributes
+delegates
+event vs delegate
+action
+function
+events
+ananymous function
+lamba expressions
+linq(zlink for a no garbage alternative)
+buit in interfaces
+Idisposable
+icomparable
+ienumerator
+iequatible
+tasks
+async
+await
+whenall
+data structure
+array
+list
+disctionary
+hashmap
+hashtable
+tree
+graph
+code abstraction
+generics<T>
+<T>
+Where
+interface vs abstract
+composition vs inheritance
+.NET
+system.reflection
+type.getmethod
+type.getfield
+type.getproperty
+type.getcustomattribute
+activatorcreateinstance
+assembly
+fieldinfo
+system.io
+file
+directory
+filestream
+streamreader
+streamwriter
+path
+system.text
+stringbuilder
+regex
+match
+split
+replace
+good luck
+ùath
+pow
+sqrt
+cos/sin
+pi
+abs
+floor
+round
+ceil
+system.linq
+where
+select
+sum
+min
+max
+average
+any
+all
+contains
+firstordefault
+toarray
+skip
+orderly
+design patterns
+creational patterns
+singleton 
+factory
+abstract factory
+prototype (=prefab)
+structural patterns
+adapter
+composite
+proxy
+flyweight
+faceda
+bridge
+decorator
+behaviour
+template methods
+chain of responsibility
+observer
+strategy
+command
+state
+visitor
+iterator
+interpreter
+memento
+Recursion
+coding standard
+naming convention
+brace style
+formatting
+file layout
+computational complexity
+big o notation
+memory
+stack
+heap
+garbage collector
+reference vs value type
+struct vs class
+memory allocation
+ram
+solid principles
+single responsibility
+open close
+interface segregation
+dependency inversion
+liskov substitution
+dev Tools
+jira
+monday.com
+trello
+tech design
+confluence
+obsidian
+notion
+miro
+IDE
+rider
+visual studio
+VSC
+git (fork soucetree GitHub desktop git kraken)
+perforce
+remote
+GitHub
+gitlab
+bitbucket
+assembla
+CI/CD
+unity test Runner
+GitHub actions
+Jenkins
+teamcity
+unity cloud
+GameCI
+API development
+Postman
+swaggerUI
+cloud services
+firebase
+azure
+unity cloud
+playlab
+AI Assistant
+chat gpt
+claude
+GitHub copilot
+cursor
+data interchange format
+Json
+xml
+csv
+Protobuf
+http request
+get
+post
+header
+body
+socket
+Advanced unity
+code
+downloadable content
+asset bundle
+addressable
+async programming
+unitask
+awaitable
+coroutine
+event
+unity actions
+actions
+unity event
+render pipeline
+standard
+legacy shaders
+dynamic/static batching
+gpu instancing
+SRP
+URP
+New 2D Render
+Shader Graph
+Decals
+New forward rendering
+new post processing
+vfx graph
+srp batching
+custom render feature
+HDRP
+raytracing
+PBR
+Volumetric light
+volumetric fog
+screen space global illumination
+Scriptable Object
+Packages manager
+cinemachine
+recorder
+input system
+probuilder
+spline
+asset store
+dotween
+odin
+SRPDebugger
+Console Pro
+Master Audio
+Build Report Tool
+Editor
+Build pipeline
+Android
+IOS
+IL2CPP
+Mono
+Profiling
+Profiler
+Frame Debugger
+Memory Profiler
+VSync
+RenderDoc
+Prefabs
+Nested prefab
+PrefabVariant
+Camera
+Camera Stacking
+Physical camera
+sorting layer
+2d vs 3d
+Physics 2d/3d
+Sprite/Mesh Renderer
+2d lighting vs 3d lighting
+orthographic vs perspective
+animation
+legacy animation component
+animator
+forward kinematic
+inverse kinematic
+blend tree
+game services
+analytics
+popup
+game states
+multiplayer
+ads
+remote parameters
+graphics
+LOD
+Scriptable render pass
+canvas
+rebuild
+layout group
+ui batching
+sprite atlas
+gpu vs cpu
+draw calls
+batching
+shaders
+HLSL
+shader graph
+unity methods
+post processing
+emissive material
+bloom
+motion blur
+vignette
+color grading
+lighting
+global illumination
+precomputed realtime
+reflection
+matcap
+progressive lightmapper
+screen space reflection
+reflection ^probes
+culling
+z culling
+backface culling
+occlusion culling
+animator culling
+render techniques
+deffered rendering
+forward rendering
+compute shader
+built in components
+decals
+vfx graph
+3d model
+mesh
+faces
+vertex
+edges
+gpu batching
+draw calls
+ static
+dynamics
+SRP batching
+GPU instancing
+UI batching
+baking
+lightmap
+reflection
+navmesh
+render buffer
+G-buffer
+color uffer
+depth buffer
+stencil buffer
+command buffer
+game architecture
+duck typing
+folder structure
+folder structure
+assembly definition
+dependency injection/ inversion
+zenject
+vcontainer
+mvc
+model
+view
+controller
+unit tests
+ECS / Data oriented design
+DOTS
+ECS
+Job system
+burst compiler
+Object pooling
+commands
+Single entry point
+update manager
+ 
+dynamic
+dynamic invoke
+
+
+Game Engine architecture 3rd edition
+Game AI pro 1/2/3
+Game Programming Gems 1->8
+GPU gems 1-3
+Fundation of game engine architecture
+game anim 2nd edition
+game engine gems
+player making décisions
+the design of Everyday things
+flow
+the art of game design
+save the cat
+story (robert mckey)
+le hero aux 1001 visages
+artbook
+soluces de jeux
