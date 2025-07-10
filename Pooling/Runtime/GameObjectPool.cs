@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Tools
+namespace Pooling.Runtime
 {
     public class GameObjectPool : MonoBehaviour, IPool
     {

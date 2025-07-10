@@ -1,48 +1,53 @@
 using UnityEngine;
 
-[RequireComponent(typeof(LineRenderer))]
-public class CircleRenderer : MonoBehaviour
+
+namespace Renderer.Runtime.CircleRenderer
 {
-    private LineRenderer lineRenderer;
-    public int steps = 90;
-    public float radius = 1f;
-    public Gradient gradient = new Gradient();
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    private void Start()
+    [RequireComponent(typeof(LineRenderer))]
+    public class CircleRenderer : MonoBehaviour
     {
-        lineRenderer = GetComponent<LineRenderer>();
-        lineRenderer.colorGradient = gradient;
-        lineRenderer.loop = true;
-        lineRenderer.useWorldSpace = false;
-        DrawCircle(steps, radius);
-    }
+        private LineRenderer lineRenderer;
+        public int steps = 90;
+        public float radius = 1f;
+        public Gradient gradient = new Gradient();
 
-    // Update is called once per frame
-    private void Update()
-    {
-
-    }
-
-    private void DrawCircle(int steps, float radius)
-    {
-        lineRenderer.positionCount = steps;
-
-        for (int i = 0; i < steps; i++)
+        // Start is called once before the first execution of Update after the MonoBehaviour is created
+        private void Start()
         {
-            float progress = (float)i / steps;
+            lineRenderer = GetComponent<LineRenderer>();
+            lineRenderer.colorGradient = gradient;
+            lineRenderer.loop = true;
+            lineRenderer.useWorldSpace = false;
+            DrawCircle(steps, radius);
+        }
 
-            float radians = progress * 2 * Mathf.PI;
+        // Update is called once per frame
+        private void Update()
+        {
 
-            float x = Mathf.Cos(radians);
-            float y = Mathf.Sin(radians);
+        }
 
-            float xScaled = x * radius;
-            float yScaled = y * radius;
+        private void DrawCircle(int steps, float radius)
+        {
+            lineRenderer.positionCount = steps;
 
-            Vector2 pos = new Vector2(xScaled, yScaled);
+            for (int i = 0; i < steps; i++)
+            {
+                float progress = (float)i / steps;
 
-            lineRenderer.SetPosition(i, pos);
+                float radians = progress * 2 * Mathf.PI;
+
+                float x = Mathf.Cos(radians);
+                float y = Mathf.Sin(radians);
+
+                float xScaled = x * radius;
+                float yScaled = y * radius;
+
+                Vector2 pos = new Vector2(xScaled, yScaled);
+
+                lineRenderer.SetPosition(i, pos);
+            }
         }
     }
+
 }

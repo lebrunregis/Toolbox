@@ -1,4 +1,5 @@
-using Tools;
+using Pooling.Runtime;
+using Renderer.Runtime.CircleRenderer;
 using UnityEngine;
 
 [RequireComponent(typeof(CircleRenderer))]
@@ -6,7 +7,7 @@ using UnityEngine;
 public class Projectile2DSpawnerController : MonoBehaviour
 {
     public Vector2 particleVelocity = new Vector2(5, 0);
-    private Tools.GameObjectPool particlePool;
+    private GameObjectPool particlePool;
     public float spawnTime = 0.1f;
     private float spawnRange;
     public float spawnDelta;
@@ -31,7 +32,7 @@ public class Projectile2DSpawnerController : MonoBehaviour
                 float dist = Random.Range(0, spawnRange);
                 particle.transform.position = transform.position + new Vector3(Mathf.Sin(angle) * dist, Mathf.Cos(angle) * dist, 0);
                 particle.SetActive(true);
-                UnityEngine.Rigidbody rb = particle.GetComponent<UnityEngine.Rigidbody>();
+                Rigidbody rb = particle.GetComponent<Rigidbody>();
                 rb.linearVelocity = particleVelocity;
             }
         }

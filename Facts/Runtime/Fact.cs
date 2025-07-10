@@ -1,26 +1,26 @@
 
+using System;
+
 namespace Facts.Runtime
 {
-    public class Fact<T> : IFact<T>
+    public class Fact<T> : IFact<T>// where T : ISerializationCallbackReceiver
     {
         private FactPersistence persistanceState;
         public T value;
-
-        public FactPersistence PersistanceState
-        {
-            get; set;
-        }
+        private System.Type type;
+        public FactPersistence PersistanceState { get => persistanceState; set => persistanceState = value; }
+        public Type Type { get => type; }
 
         public Fact(T fact, FactPersistence persistence = FactPersistence.Runtime)
         {
             value = fact;
-            persistanceState = persistence;
+            PersistanceState = persistence;
+            type = typeof(T);
         }
 
         public T Value()
         {
             return value;
-
         }
 
         public void Value(T newValue)

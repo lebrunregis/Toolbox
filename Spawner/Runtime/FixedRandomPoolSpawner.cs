@@ -1,6 +1,9 @@
-using Tools;
+using Pooling.Runtime;
 
-public class FixedRandomPoolSpawner : SpawnerController<FixedSizeRandomObjectPool>
+namespace Spawner.Runtime
 {
+    public class FixedRandomPoolSpawner : SpawnerController<FixedSizeRandomObjectPool>
+    {
 
+    }
 }

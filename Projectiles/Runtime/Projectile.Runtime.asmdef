@@ -1,0 +1,17 @@
+{
+    "name": "Projectile.Runtime",
+    "rootNamespace": "",
+    "references": [
+        "Pooling.Runtime",
+        "Renderer.Runtime"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

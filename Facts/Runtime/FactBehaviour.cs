@@ -2,12 +2,12 @@ using System.Collections.Generic;
 
 namespace Facts.Runtime
 {
-    public interface IFactBehaviour<T>
+    public interface IFactBehaviour<U, T>
     {
-        void CreateOrUpdateFact(string key, IFact<T> fact);
-        bool TryGetFact(string key, out IFact<T> fact);
-        bool RemoveFact(string key);
+        void CreateOrUpdateFact(U key, IFact<T> fact);
+        bool TryGetFact(U key, out IFact<T> fact);
+        bool RemoveFact(U key);
 
-        protected Dictionary<string, IFact<T>> GameFacts();
+        protected Dictionary<U, IFact<T>> GameFacts();
     }
 }

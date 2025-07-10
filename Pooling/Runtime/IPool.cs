@@ -1,6 +1,10 @@
 using UnityEngine;
 
-public interface IPool
+namespace Pooling.Runtime
 {
-    GameObject GetGameObject();
+    public interface IPool
+    {
+        GameObject GetGameObject();
+    }
+
 }
