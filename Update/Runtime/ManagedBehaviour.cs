@@ -1,52 +1,16 @@
 using UnityEngine;
 
-public class ManagedBehaviour : MonoBehaviour
+public abstract class ManagedBehaviour : MonoBehaviour, IUpdateObserver
 {
-    #region Publics
-
-    #endregion
-
-
-    #region Unity Api
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    private void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    private void Update()
-    {
-
-    }
-
     private void OnEnable()
     {
-
+        ScaledUpdatePublisher.RegisterObserver(this);
     }
 
     private void OnDisable()
     {
-
+        ScaledUpdatePublisher.UnregisterObserver(this);
     }
 
-    #endregion
-
-
-    #region Main Methods
-
-    #endregion
-
-
-    #region Utils
-
-    #endregion
-
-
-    #region Private and Protected
-
-    #endregion
-
-
+    public abstract void ObservedUpdate();
 }
