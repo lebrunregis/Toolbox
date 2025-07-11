@@ -18,6 +18,7 @@ namespace Facts.Runtime
         public static FactDictionary<ComponentFactEnum, Component> components = new();
         public static FactDictionary<ComponentFactEnum, ISerializationCallbackReceiver> serializable = new();
 
+
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             info.AddValue("m_gameFactsBoolean", booleans, typeof(FactDictionary<BooleanFactEnum, bool>));
@@ -30,6 +31,5 @@ namespace Facts.Runtime
             info.AddValue("m_gameSerializable", serializable, typeof(FactDictionary<ComponentFactEnum, ISerializationCallbackReceiver>));
         }
         #endregion
-
     }
 }

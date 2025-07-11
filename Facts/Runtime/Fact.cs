@@ -7,7 +7,7 @@ namespace Facts.Runtime
     {
         private FactPersistence persistanceState;
         public T value;
-        private System.Type type;
+        private readonly Type type;
         public FactPersistence PersistanceState { get => persistanceState; set => persistanceState = value; }
         public Type Type { get => type; }
 

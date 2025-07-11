@@ -1,7 +1,9 @@
 {
     "name": "Facts.Runtime",
     "rootNamespace": "Facts.Runtime",
-    "references": [],
+    "references": [
+        ""
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
