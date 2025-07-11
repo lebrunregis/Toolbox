@@ -11,7 +11,7 @@ namespace Facts.Runtime
         public List<U> _keys = new();
         public List<IFact<T>> _values = new();
 
-        public void CreateOrUpdateFact(U key, IFact<T> fact)
+        public void CreateFact(U key, IFact<T> fact)
         {
             _facts.Add(key, fact);
         }

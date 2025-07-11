@@ -3,27 +3,30 @@ using UnityEngine;
 
 namespace Update.Runtime
 {
-    public class ScaledUpdatePublisher : MonoBehaviour, IUpdatePublisher
+    public class LateUpdatePublisher : MonoBehaviour, ILateUpdateManager
     {
         private readonly List<IUpdateObserver> _observers = new();
-        public float timeScale;
-
-        public void Update()
+        private void LateUpdate()
         {
             int observerSize = _observers.Count;
-            float time = Time.deltaTime *timeScale;
+            float time = Time.deltaTime;
             for (int i = 0; i < observerSize; i++)
             {
                 _observers[i].ObservedUpdate(time);
             }
         }
 
-        public void RegisterUpdateObserver(IUpdateObserver observer)
+        void ILateUpdateManager.LateUpdate()
+        {
+            LateUpdate();
+        }
+
+        public void RegisterLateUpdateObserver(IUpdateObserver observer)
         {
             _observers.Add(observer);
         }
 
-        public void UnregisterUpdateObserver(IUpdateObserver observer)
+        public void UnregisterLateUpdateObserver(IUpdateObserver observer)
         {
             _observers.Remove(observer);
         }

@@ -1,39 +1,28 @@
-using System;
-using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
+using Update.Runtime;
 
-public class GameInitiator : MonoBehaviour
+public class GameInitiator :IGameInitiator
 {
-    [SerializeField] private Camera _mainCamera;
-    [SerializeField] private Light _mainDirectionalLight;
-    [SerializeField] private EventSystem _mainEventSystem;
-    [SerializeField] private GameObject _background;
 
-
-    private async void Start()
+    public void BindObjects()
     {
-        BindObjects();
-        //_loadingScreen.Show();
-        await InitializeObjects();
-        await CreateObjects();
+        throw new System.NotImplementedException();
     }
 
-    private async UniTask CreateObjects()
+    public UniTask CreateObjects()
     {
-       // throw new NotImplementedException();
+        throw new System.NotImplementedException();
     }
 
-    private async UniTask InitializeObjects()
+    public UniTask InitializeObjects()
     {
-        //   throw new NotImplementedException();
-       // await
-          //     _gameInputSystem.Enabled();
+        throw new System.NotImplementedException();
     }
 
-    private void BindObjects()
+    public void Start()
     {
-       // throw new NotImplementedException();
+        throw new System.NotImplementedException();
     }
 }

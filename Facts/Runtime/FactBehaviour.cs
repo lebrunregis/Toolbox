@@ -4,7 +4,7 @@ namespace Facts.Runtime
 {
     public interface IFactBehaviour<U, T>
     {
-        void CreateOrUpdateFact(U key, IFact<T> fact);
+        void CreateFact(U key, IFact<T> fact);
         bool TryGetFact(U key, out IFact<T> fact);
         bool RemoveFact(U key);
 

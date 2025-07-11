@@ -1,6 +1,9 @@
-using UnityEngine;
-
-public interface IFixedUpdateObserver
+namespace Update.Runtime
 {
-    void ObservedFixedUpdate();
+
+    public interface IFixedUpdateObserver
+    {
+        void ObservedFixedUpdate();
+    }
+
 }

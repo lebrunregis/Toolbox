@@ -1,6 +1,9 @@
-using UnityEngine;
-
-public interface ILateUpdateObserver
+namespace Update.Runtime
 {
-    void ObservedLateUpdate();
+    public interface ILateUpdateObserver
+    {
+        void ObservedLateUpdate(float deltatime);
+    }
+
 }
+

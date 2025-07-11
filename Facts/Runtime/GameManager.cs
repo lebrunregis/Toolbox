@@ -1,6 +1,7 @@
 using System;
 using System.Runtime.Serialization;
 using UnityEngine;
+using Update.Runtime;
 
 namespace Facts.Runtime
 {
@@ -8,6 +9,7 @@ namespace Facts.Runtime
     public class GameManager : MonoBehaviour
     {
         #region Publics
+        //Data
         public static FactDictionary<BooleanFactEnum, bool> booleans = new();
         public static FactDictionary<StringFactEnum, string> strings = new();
         public static FactDictionary<IntFactEnum, int> ints = new();
@@ -17,7 +19,6 @@ namespace Facts.Runtime
         public static FactDictionary<GameObjectFactEnum, GameObject> gameobjects = new();
         public static FactDictionary<ComponentFactEnum, Component> components = new();
         public static FactDictionary<ComponentFactEnum, ISerializationCallbackReceiver> serializable = new();
-
 
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {

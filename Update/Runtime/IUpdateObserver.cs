@@ -1,4 +1,9 @@
-public interface IUpdateObserver
+namespace Update.Runtime
 {
-    void ObservedUpdate();
+
+    public interface IUpdateObserver
+    {
+        void ObservedUpdate(float deltaTime);
+    }
+
 }

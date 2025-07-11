@@ -1,25 +1,31 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FixedUpdatePublisher : MonoBehaviour
+namespace Update.Runtime
 {
-    private static readonly List<IUpdateObserver> _observers = new();
-    private void Update()
+    public class FixedUpdatePublisher : MonoBehaviour, IFixedUpdatePublisher
     {
-        int observerSize = _observers.Count;
-        for (int i = 0; i < observerSize; i++)
+        private readonly List<IUpdateObserver> _observers = new();
+        public void FixedUpdate()
         {
-            _observers[i].ObservedUpdate();
+            int observerSize = _observers.Count;
+            float time = Time.fixedDeltaTime;
+            for (int i = 0; i < observerSize; i++)
+            {
+                _observers[i].ObservedUpdate(time);
+            }
+        }
+
+        public void RegisterFixedUpdateObserver(IUpdateObserver observer)
+        {
+            _observers.Add(observer);
+        }
+
+        public void UnregisterFixedUpdateObserver(IUpdateObserver observer)
+        {
+            _observers.Remove(observer);
         }
     }
 
-    public static void RegisterObserver(IUpdateObserver observer)
-    {
-        _observers.Add(observer);
-    }
-
-    public static void UnregisterObserver(IUpdateObserver observer)
-    {
-        _observers.Remove(observer);
-    }
 }
+

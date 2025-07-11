@@ -2,7 +2,7 @@
     "name": "Facts.Runtime",
     "rootNamespace": "Facts.Runtime",
     "references": [
-        ""
+        "Update.Runtime"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

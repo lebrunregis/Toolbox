@@ -1,16 +1,21 @@
 using UnityEngine;
 
-public abstract class ManagedBehaviour : MonoBehaviour, IUpdateObserver
+namespace Update.Runtime
 {
-    private void OnEnable()
+    public abstract class ManagedBehaviour : MonoBehaviour, IUpdateObserver
     {
-        ScaledUpdatePublisher.RegisterObserver(this);
+        private void OnEnable()
+        {
+           UpdatePublishers.updatePublisher.RegisterUpdateObserver(this);
+        }
+
+        private void OnDisable()
+        {
+            UpdatePublishers.updatePublisher.UnregisterUpdateObserver(this);
+        }
+
+        public abstract void ObservedUpdate(float deltatime);
     }
 
-    private void OnDisable()
-    {
-        ScaledUpdatePublisher.UnregisterObserver(this);
-    }
-
-    public abstract void ObservedUpdate();
 }
+

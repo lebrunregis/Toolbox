@@ -1,6 +1,9 @@
-using UnityEngine;
-
-public interface IScaledUpdateObserver
+namespace Update.Runtime
 {
-    void ObservedScaledUpdate(float time);
+
+    public interface IScaledUpdateObserver
+    {
+        void ObservedScaledUpdate(float time);
+    }
+
 }
