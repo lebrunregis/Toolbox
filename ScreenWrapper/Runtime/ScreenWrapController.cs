@@ -2,14 +2,12 @@ using UnityEngine;
 
 namespace ScreenWrapper.Runtime
 {
-    [RequireComponent(typeof(Rigidbody2D))]
     public class ScreenWrapController : MonoBehaviour
     {
         public Camera m_camera;
         public ScreenBehaviour mode;
         public Rect padding; //unimplemented
         private Rect screenRect;
-        private Rigidbody2D rb;
 
         public enum ScreenBehaviour
         {
@@ -29,7 +27,6 @@ namespace ScreenWrapper.Runtime
             {
                 m_camera = Camera.main;
             }
-            rb = GetComponent<Rigidbody2D>();
         }
 
         // Update is called once per frame
@@ -47,26 +44,25 @@ namespace ScreenWrapper.Runtime
                     case ScreenBehaviour.None:
                         break;
                     case ScreenBehaviour.Box:
-                        this.transform.position = Box(transform.position, screenRect, rb);
+                        this.transform.position = Box(transform.position, screenRect);
                         break;
                     case ScreenBehaviour.XWrap:
                         this.transform.position = XWrap(transform.position, screenRect);
-                        this.transform.position = Box(transform.position, screenRect, rb);
+                        this.transform.position = Box(transform.position, screenRect);
                         break;
                     case ScreenBehaviour.YWrap:
                         this.transform.position = YWrap(transform.position, screenRect);
-                        this.transform.position = Box(transform.position, screenRect, rb);
+                        this.transform.position = Box(transform.position, screenRect);
                         break;
                     case ScreenBehaviour.Wrap:
                         this.transform.position = Wrap(transform.position, screenRect);
-                        this.transform.position = Box(transform.position, screenRect, rb);
+                        this.transform.position = Box(transform.position, screenRect);
                         break;
                     case ScreenBehaviour.Cleanup:
                         Cleanup(transform.position, screenRect);
                         break;
                     case ScreenBehaviour.Bounce:
-                        rb.linearVelocity = Bounce(transform.position, screenRect, rb.linearVelocity);
-                        this.transform.position = Box(transform.position, screenRect, rb);
+                        this.transform.position = Box(transform.position, screenRect);
                         break;
                 }
             }
@@ -88,7 +84,7 @@ namespace ScreenWrapper.Runtime
             return velocity;
         }
 
-        private static Vector2 Box(Vector2 pos, Rect screenRect, Rigidbody2D rb)
+        private static Vector2 Box(Vector2 pos, Rect screenRect)
         {
             return new Vector2(Mathf.Clamp(pos.x, screenRect.x, screenRect.x + screenRect.width),
                 Mathf.Clamp(pos.y, screenRect.y, screenRect.y + screenRect.height));

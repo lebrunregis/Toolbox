@@ -1,7 +1,7 @@
 using UnityEngine;
 
 
-namespace Renderer.Runtime.CircleRenderer
+namespace Toolbox.Renderer.Runtime.CircleRenderer
 {
     [RequireComponent(typeof(LineRenderer))]
     public class CircleRenderer : MonoBehaviour

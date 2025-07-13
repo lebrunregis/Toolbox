@@ -11,7 +11,7 @@ namespace Update.Runtime
         public void Update()
         {
             int observerSize = _observers.Count;
-            float time = Time.deltaTime *timeScale;
+            float time = Time.deltaTime * timeScale;
             for (int i = 0; i < observerSize; i++)
             {
                 _observers[i].ObservedUpdate(time);

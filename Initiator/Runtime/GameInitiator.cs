@@ -1,9 +1,6 @@
 using Cysharp.Threading.Tasks;
-using System.Collections.Generic;
-using UnityEngine;
-using Update.Runtime;
 
-public class GameInitiator :IGameInitiator
+public class GameInitiator : IGameInitiator
 {
 
     public void BindObjects()

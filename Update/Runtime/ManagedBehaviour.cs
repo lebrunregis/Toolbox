@@ -6,7 +6,7 @@ namespace Update.Runtime
     {
         private void OnEnable()
         {
-           UpdatePublishers.updatePublisher.RegisterUpdateObserver(this);
+            UpdatePublishers.updatePublisher.RegisterUpdateObserver(this);
         }
 
         private void OnDisable()

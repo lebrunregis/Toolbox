@@ -1,9 +1,8 @@
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Update.Runtime
 {
-    public static class UpdatePublishers 
+    public static class UpdatePublishers
     {
         //Update publishers
         public static UpdatePublisher updatePublisher = new();
