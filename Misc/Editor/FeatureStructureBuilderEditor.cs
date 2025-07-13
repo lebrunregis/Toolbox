@@ -9,13 +9,13 @@ public class FeatureFolderStructureBuilderEditor : EditorWindow
 
     public string dataPath = Application.dataPath;
     public string featureStorePath = "_/Features";
-    string featureName = "";
-    bool makeData = true;
-    bool makeEditor = true;
-    bool makeRuntime = true;
+    private string featureName = "";
+    private bool makeData = true;
+    private bool makeEditor = true;
+    private bool makeRuntime = true;
 
     [MenuItem("Assets/Create/Feature", priority = 11)]
-    static void CreateStructure()
+    private static void CreateStructure()
     {
         FeatureFolderStructureBuilderEditor window = ScriptableObject.CreateInstance<FeatureFolderStructureBuilderEditor>();
         window.ShowUtility();
@@ -30,7 +30,7 @@ public class FeatureFolderStructureBuilderEditor : EditorWindow
     }
 
 
-    void OnGUI()
+    private void OnGUI()
     {
         bool enterPressed = false;
 

@@ -35,7 +35,7 @@ public class PlayerChaser : MonoBehaviour
 
 
     #region Private and Protected
-    private PatrolRoute _patrolRoute;
+    private readonly PatrolRoute _patrolRoute;
     #endregion
 
 

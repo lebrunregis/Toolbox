@@ -1,4 +1,4 @@
-using Toolbox.Renderer.Runtime.CircleRenderer;
+using Toolbox.Renderer.Runtime;
 using UnityEngine;
 
 [RequireComponent(typeof(LineRenderer))]

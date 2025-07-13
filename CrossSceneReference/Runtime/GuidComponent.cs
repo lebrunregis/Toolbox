@@ -12,7 +12,7 @@ using UnityEditor.SceneManagement;
 public class GuidComponent : MonoBehaviour, ISerializationCallbackReceiver
 {
     // System guid we use for comparison and generation
-    System.Guid guid = System.Guid.Empty;
+    private System.Guid guid = System.Guid.Empty;
 
     // Unity's serialization system doesn't know about System.Guid, so we convert to a byte array
     // Fun fact, we tried using strings at first, but that allocated memory and was twice as slow
@@ -28,7 +28,7 @@ public class GuidComponent : MonoBehaviour, ISerializationCallbackReceiver
 
     // When de-serializing or creating this component, we want to either restore our serialized GUID
     // or create a new one.
-    void CreateGuid()
+    private void CreateGuid()
     {
         // if our serialized data is invalid, then we are a new object and need a new GUID
         if (serializedGuid == null || serializedGuid.Length != 16)
@@ -133,12 +133,12 @@ public class GuidComponent : MonoBehaviour, ISerializationCallbackReceiver
         }
     }
 
-    void Awake()
+    private void Awake()
     {
         CreateGuid();
     }
 
-    void OnValidate()
+    private void OnValidate()
     {
 #if UNITY_EDITOR
         // similar to on Serialize, but gets called on Copying a Component or Applying a Prefab

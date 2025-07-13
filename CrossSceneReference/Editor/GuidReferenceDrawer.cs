@@ -7,13 +7,13 @@ using UnityEngine;
 [CustomPropertyDrawer(typeof(GuidReference))]
 public class GuidReferenceDrawer : PropertyDrawer
 {
-    SerializedProperty guidProp;
-    SerializedProperty sceneProp;
-    SerializedProperty nameProp;
+    private SerializedProperty guidProp;
+    private SerializedProperty sceneProp;
+    private SerializedProperty nameProp;
 
     // cache off GUI content to avoid creating garbage every frame in editor
-    GUIContent sceneLabel = new GUIContent("Containing Scene", "The target object is expected in this scene asset.");
-    GUIContent clearButtonGUI = new GUIContent("Clear", "Remove Cross Scene Reference");
+    private readonly GUIContent sceneLabel = new("Containing Scene", "The target object is expected in this scene asset.");
+    private readonly GUIContent clearButtonGUI = new("Clear", "Remove Cross Scene Reference");
 
     // add an extra line to display source scene for targets
     public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
@@ -68,7 +68,7 @@ public class GuidReferenceDrawer : PropertyDrawer
             EditorGUI.LabelField(guidCompPosition, new GUIContent(nameProp.stringValue, "Target GameObject is not currently loaded."), EditorStyles.objectField);
             GUI.enabled = guiEnabled;
 
-            Rect clearButtonRect = new Rect(guidCompPosition);
+            Rect clearButtonRect = new(guidCompPosition);
             clearButtonRect.xMin = guidCompPosition.xMax;
             clearButtonRect.xMax += buttonWidth;
 
@@ -119,7 +119,7 @@ public class GuidReferenceDrawer : PropertyDrawer
         EditorGUI.EndProperty();
     }
 
-    void ClearPreviousGuid()
+    private void ClearPreviousGuid()
     {
         nameProp.stringValue = string.Empty;
         sceneProp.objectReferenceValue = null;

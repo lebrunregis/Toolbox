@@ -39,7 +39,7 @@ public class LevelSelector : EnumField
     {
 
         System.AppDomain currentDomain = System.AppDomain.CurrentDomain;
-        AssemblyName levelEnum = new AssemblyName("LevelEnum");
+        AssemblyName levelEnum = new("LevelEnum");
         AssemblyBuilder ab = currentDomain.DefineDynamicAssembly(levelEnum, AssemblyBuilderAccess.Run);
         ModuleBuilder mb = ab.DefineDynamicModule(levelEnum.Name);
         EnumBuilder enumerator = mb.DefineEnum("LevelEnum", TypeAttributes.Public, typeof(int));

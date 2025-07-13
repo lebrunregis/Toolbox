@@ -1,10 +1,7 @@
 {
-    "name": "Projectile.Runtime",
+    "name": "SQLLite.Runtime",
     "rootNamespace": "",
-    "references": [
-        "Pooling.Runtime",
-        "Toolbox.Renderer.Runtime"
-    ],
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

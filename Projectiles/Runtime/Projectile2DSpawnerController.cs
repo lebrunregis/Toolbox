@@ -1,12 +1,12 @@
 using Pooling.Runtime;
-using Toolbox.Renderer.Runtime.CircleRenderer;
+using Toolbox.Renderer.Runtime;
 using UnityEngine;
 
 [RequireComponent(typeof(CircleRenderer))]
 [RequireComponent(typeof(GameObjectPool))]
 public class Projectile2DSpawnerController : MonoBehaviour
 {
-    public Vector2 particleVelocity = new Vector2(5, 0);
+    public Vector2 particleVelocity = new(5, 0);
     private GameObjectPool particlePool;
     public float spawnTime = 0.1f;
     private float spawnRange;

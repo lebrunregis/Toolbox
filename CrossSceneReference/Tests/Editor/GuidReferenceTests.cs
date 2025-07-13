@@ -13,10 +13,10 @@ public class GuidReferenceTests
     // reference it
     // dereference it
 
-    string prefabPath;
-    GuidComponent guidBase;
-    GameObject prefab;
-    GuidComponent guidPrefab;
+    private string prefabPath;
+    private GuidComponent guidBase;
+    private GameObject prefab;
+    private GuidComponent guidPrefab;
 
     [OneTimeSetUp]
     public void Setup()
@@ -31,7 +31,7 @@ public class GuidReferenceTests
 
     public GuidComponent CreateNewGuid()
     {
-        GameObject newGO = new GameObject("GuidTestGO");
+        GameObject newGO = new("GuidTestGO");
         return newGO.AddComponent<GuidComponent>();
     }
 
@@ -80,7 +80,7 @@ public class GuidReferenceTests
     [UnityTest]
     public IEnumerator GuidValidReference()
     {
-        GuidReference reference = new GuidReference(guidBase);
+        GuidReference reference = new(guidBase);
         Assert.AreEqual(reference.gameObject, guidBase.gameObject);
 
         yield return null;
@@ -90,7 +90,7 @@ public class GuidReferenceTests
     public IEnumerator GuidInvalidReference()
     {
         GuidComponent newGuid = CreateNewGuid();
-        GuidReference reference = new GuidReference(newGuid);
+        GuidReference reference = new(newGuid);
         Object.DestroyImmediate(newGuid);
 
         Assert.IsNull(reference.gameObject);

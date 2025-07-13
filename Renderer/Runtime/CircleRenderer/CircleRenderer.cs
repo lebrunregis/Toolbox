@@ -1,7 +1,7 @@
 using UnityEngine;
 
 
-namespace Toolbox.Renderer.Runtime.CircleRenderer
+namespace Toolbox.Renderer.Runtime
 {
     [RequireComponent(typeof(LineRenderer))]
     public class CircleRenderer : MonoBehaviour
@@ -9,7 +9,7 @@ namespace Toolbox.Renderer.Runtime.CircleRenderer
         private LineRenderer lineRenderer;
         public int steps = 90;
         public float radius = 1f;
-        public Gradient gradient = new Gradient();
+        public Gradient gradient = new();
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         private void Start()
@@ -43,7 +43,7 @@ namespace Toolbox.Renderer.Runtime.CircleRenderer
                 float xScaled = x * radius;
                 float yScaled = y * radius;
 
-                Vector2 pos = new Vector2(xScaled, yScaled);
+                Vector2 pos = new(xScaled, yScaled);
 
                 lineRenderer.SetPosition(i, pos);
             }

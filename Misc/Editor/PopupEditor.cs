@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class PopupEditor : EditorWindow
 {
-    float TimeToLive;
-    string popupText;
+    private float TimeToLive;
+    private string popupText;
 
     public void ShowPopup(float time, string text)
     {
@@ -12,7 +12,7 @@ public class PopupEditor : EditorWindow
         popupText = text;
     }
 
-    void OnGUI()
+    private void OnGUI()
     {
         TimeToLive -= Time.deltaTime;
         EditorGUILayout.LabelField(popupText);

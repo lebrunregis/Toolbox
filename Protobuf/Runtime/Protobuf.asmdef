@@ -1,9 +1,8 @@
 {
-    "name": "Projectile.Runtime",
+    "name": "Protobuf.Runtime",
     "rootNamespace": "",
     "references": [
-        "Pooling.Runtime",
-        "Toolbox.Renderer.Runtime"
+        "GUID:8b608b8e82fbea94fbd06f3acb64d6a3"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

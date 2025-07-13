@@ -4,7 +4,7 @@ public class LifeController : MonoBehaviour
 {
     #region Public
     public GameObject prefab;
-    public Vector2Int m_size = new Vector2Int(5, 5);
+    public Vector2Int m_size = new(5, 5);
     private LifeState[] m_gameState;
     public GameObject[] m_cubes;
 

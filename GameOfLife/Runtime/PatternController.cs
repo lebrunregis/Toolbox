@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class PatternController : MonoBehaviour
 {
     #region Public
-    public Vector2Int m_size = new Vector2Int(3, 3);
+    public Vector2Int m_size = new(3, 3);
     public Toggle m_prefabToggle;
     #endregion
 

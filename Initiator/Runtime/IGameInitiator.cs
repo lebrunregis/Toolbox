@@ -3,11 +3,11 @@ using Cysharp.Threading.Tasks;
 public interface IGameInitiator
 {
 
-    public abstract void Start();
+    abstract void Start();
 
-    public abstract UniTask CreateObjects();
+    abstract UniTask CreateObjects();
 
-    public abstract UniTask InitializeObjects();
+    abstract UniTask InitializeObjects();
 
-    public abstract void BindObjects();
+    abstract void BindObjects();
 }

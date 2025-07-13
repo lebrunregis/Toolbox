@@ -39,7 +39,7 @@ public class GuidManager
     }
 
     // Singleton interface
-    static GuidManager Instance;
+    private static GuidManager Instance;
 
     // All the public API is static so you need not worry about creating an instance
     public static bool Add(GuidComponent guidComponent)
@@ -91,7 +91,7 @@ public class GuidManager
     }
 
     // instance data
-    private Dictionary<System.Guid, GuidInfo> guidToObjectMap;
+    private readonly Dictionary<System.Guid, GuidInfo> guidToObjectMap;
 
     private GuidManager()
     {
@@ -102,7 +102,7 @@ public class GuidManager
     {
         Guid guid = guidComponent.GetGuid();
 
-        GuidInfo info = new GuidInfo(guidComponent);
+        GuidInfo info = new(guidComponent);
 
         if (!guidToObjectMap.ContainsKey(guid))
         {

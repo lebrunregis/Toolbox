@@ -61,7 +61,7 @@ namespace Level.Data
             }
             else
             {
-                Debug.Log("Could not find lighting scene. Thing about adding one!");
+                Debug.Log("Could not find lighting scene. Think about adding one!");
             }
 
         }

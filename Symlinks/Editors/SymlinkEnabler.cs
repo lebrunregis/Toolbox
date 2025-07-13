@@ -77,7 +77,7 @@ public class SymlinkEnabler : Button
             // so it can calculate how many items to actually display
             const int itemHeight = 16;
 
-            ListView listView = new ListView(levelStates, itemHeight, makeItem, bindItem)
+            ListView listView = new(levelStates, itemHeight, makeItem, bindItem)
             {
             };
 
@@ -170,7 +170,7 @@ public class SymlinkEnabler : Button
 
         private bool IsSymbolic(string path)
         {
-            FileInfo pathInfo = new FileInfo(path);
+            FileInfo pathInfo = new(path);
             return pathInfo.Attributes.HasFlag(FileAttributes.ReparsePoint);
             //Can give false positives but not in our use case
         }

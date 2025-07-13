@@ -2,8 +2,8 @@
 {
     internal interface ILateUpdateManager
     {
-        public abstract void LateUpdate();
-        public abstract void RegisterLateUpdateObserver(IUpdateObserver observer);
-        public abstract void UnregisterLateUpdateObserver(IUpdateObserver observer);
+        abstract void LateUpdate();
+        abstract void RegisterLateUpdateObserver(IUpdateObserver observer);
+        abstract void UnregisterLateUpdateObserver(IUpdateObserver observer);
     }
 }

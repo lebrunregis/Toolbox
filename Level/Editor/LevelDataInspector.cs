@@ -11,7 +11,7 @@ using UnityEngine.UIElements;
 public class LevelDataInspector : Editor
 {
     public LevelData levelData;
-    void OnEnable()
+    private void OnEnable()
     {
 
         // Setup the SerializedProperties.
@@ -38,7 +38,7 @@ public class LevelDataInspector : Editor
     private class AddScenePopup : EditorWindow
     {
         public LevelData levelData;
-        TextField nameField;
+        private TextField nameField;
 
         public AddScenePopup(LevelData levelData)
         {
@@ -68,7 +68,7 @@ public class LevelDataInspector : Editor
             root.Add(button);
         }
 
-        void ButtonClickedCallback()
+        private void ButtonClickedCallback()
         {
             string text = nameField.text;
             if (!string.IsNullOrEmpty(text))
@@ -82,7 +82,7 @@ public class LevelDataInspector : Editor
                 if (EditorSceneManager.SaveScene(newScene, filepath))
                 {
                     string guid = AssetDatabase.AssetPathToGUID(filepath);
-                    AssetReference assetReference = new AssetReference(guid);
+                    AssetReference assetReference = new(guid);
                     //  levelData.assetReferences  = levelData.assetReferences.Append(assetReference).ToArray();
                     levelData.ReloadLevel();
                 }
@@ -92,9 +92,9 @@ public class LevelDataInspector : Editor
 
     private class DeleteScenesPopup : EditorWindow
     {
-        LevelData levelData;
+        private readonly LevelData levelData;
         private readonly Toggle[] ToDelete;
-        Vector2 scrollPos;
+        private Vector2 scrollPos;
         public DeleteScenesPopup(LevelData levelData)
         {
             this.levelData = levelData;

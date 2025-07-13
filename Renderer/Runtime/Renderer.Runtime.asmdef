@@ -1,3 +1,14 @@
 {
-	"name": "Renderer.Runtime"
+    "name": "Toolbox.Renderer.Runtime",
+    "rootNamespace": "Toolbox.Renderer.Runtime",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }

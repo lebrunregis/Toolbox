@@ -19,7 +19,7 @@ namespace Parabox
 
 
         // FileAttributes that match a junction folder.
-        const FileAttributes FOLDER_SYMLINK_ATTRIBS = FileAttributes.Directory | FileAttributes.ReparsePoint;
+        private const FileAttributes FOLDER_SYMLINK_ATTRIBS = FileAttributes.Directory | FileAttributes.ReparsePoint;
 
         // Style used to draw the symlink indicator in the project view.
         private static GUIStyle _symlinkMarkerStyle = null;
@@ -71,7 +71,7 @@ namespace Parabox
 #if UNITY_EDITOR_WIN
         // Create an absolute junction
         [MenuItem("Assets/Create/Folder (Junction)", false, 20)]
-        static void Junction()
+        private static void Junction()
         {
             Symlink(SymlinkType.Junction);
         }
@@ -79,19 +79,19 @@ namespace Parabox
 
         // Create an absolute symbolic link
         [MenuItem("Assets/Create/Folder (Absolute Symlink)", false, 21)]
-        static void SymlinkAbsolute()
+        private static void SymlinkAbsolute()
         {
             Symlink(SymlinkType.Absolute);
         }
 
         // Create a relative symbolic link
         [MenuItem("Assets/Create/Folder (Relative Symlink)", false, 22)]
-        static void SymlinkRelative()
+        private static void SymlinkRelative()
         {
             Symlink(SymlinkType.Relative);
         }
 
-        static void Symlink(SymlinkType linkType)
+        private static void Symlink(SymlinkType linkType)
         {
             string sourceFolderPath = EditorUtility.OpenFolderPanel("Select Folder Source", "", "");
 
@@ -211,7 +211,7 @@ namespace Parabox
             AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
         }
 
-        static string GetRelativePath(string sourcePath, string outputPath)
+        private static string GetRelativePath(string sourcePath, string outputPath)
         {
             if (string.IsNullOrEmpty(outputPath))
             {
@@ -250,7 +250,7 @@ namespace Parabox
             return string.Join(Path.DirectorySeparatorChar.ToString(), newSplitTarget);
         }
 
-        static void ExecuteCmdCommand(string command, bool asAdmin)
+        private static void ExecuteCmdCommand(string command, bool asAdmin)
         {
             var startInfo = new ProcessStartInfo
             {
@@ -281,7 +281,7 @@ namespace Parabox
             }
         }
 
-        static void ExecuteBashCommand(string command)
+        private static void ExecuteBashCommand(string command)
         {
             command = command.Replace("\"", "\"\"");
 

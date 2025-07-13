@@ -99,18 +99,18 @@ namespace Gauge.Runtime
 
         #region Private and Protected
 
-        private float _gaugeRange = 0.1f;
+        private readonly float _gaugeRange = 0.1f;
         private float _gaugeValue = 0.0f;
-        private float _gaugeValueDownSpeed = 0.2f;
-        private float _gaugeValueUpSpeed = 0.3f;
-        private float _gaugeStartValue = 0.5f;
-        private float _gaugeTargetValue = 0.8f;
+        private readonly float _gaugeValueDownSpeed = 0.2f;
+        private readonly float _gaugeValueUpSpeed = 0.3f;
+        private readonly float _gaugeStartValue = 0.5f;
+        private readonly float _gaugeTargetValue = 0.8f;
         private GameState _gameState = GameState.Invalid;
         private float _score = 0;
-        private float _scoreUpSpeed = 5f;
-        private int _maxLife = 1;
+        private readonly float _scoreUpSpeed = 5f;
+        private readonly int _maxLife = 1;
         private float _life = 0f;
-        private float _lifeDecreaseSpeed = 1f;
+        private readonly float _lifeDecreaseSpeed = 1f;
         private void CheckGameStart()
         {
             if (IsBetween(_playerGauge.value, _gaugeTargetValue - _gaugeRange, _gaugeTargetValue + _gaugeRange))
