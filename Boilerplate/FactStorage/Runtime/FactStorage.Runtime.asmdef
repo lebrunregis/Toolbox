@@ -1,6 +1,6 @@
 {
-    "name": "SaveSystem.Data",
-    "rootNamespace": "",
+    "name": "FactStorage.Runtime",
+    "rootNamespace": "FactStorage.Runtime",
     "references": [
         "GUID:13a42345703ba264ea72a31060e136aa"
     ],

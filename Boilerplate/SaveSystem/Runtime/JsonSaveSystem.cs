@@ -5,21 +5,10 @@ namespace SaveSystem.Runtime
 {
     public class JsonSaveSystem : ISaveSystem
     {
-        public void Save(MonoBehaviour gamestate)
+        public void Save(GameFactsStorage gamestate)
         {
-            TextWriter textWriter = new StringWriter();
-            JsonSerializer serializer = new()
-            {
-                Formatting = Formatting.Indented
-            };
-            serializer.Serialize(textWriter, gamestate);
-            string output = JsonConvert.SerializeObject(gamestate);
-            Debug.Log(output);
+
         }
 
-        public void Load(object gamestate)
-        {
-            //    var deserializedPlayer = JsonSerialization.FromJson<Player>(json);
-        }
     }
 }

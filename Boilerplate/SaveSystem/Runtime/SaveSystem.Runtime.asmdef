@@ -2,9 +2,9 @@
     "name": "SaveSystem.Runtime",
     "rootNamespace": "SaveSystem.Runtime",
     "references": [
-        "GUID:f27b3a58e728ef74f9dd62e07b2b867b",
         "GUID:ad0937b8ee523d94fb76594650e0db8e",
-        "GUID:d4fa3a3b54a9f6b4dbcee9b958d01eae"
+        "GUID:13a42345703ba264ea72a31060e136aa",
+        "GUID:ebfd2e0e9482f104a8faf662215eceaa"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -1,9 +1,7 @@
 {
-    "name": "SaveSystem.Data",
-    "rootNamespace": "",
-    "references": [
-        "GUID:13a42345703ba264ea72a31060e136aa"
-    ],
+    "name": "UpdatePublisher.Runtime",
+    "rootNamespace": "UpdatePublisher.Runtime",
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

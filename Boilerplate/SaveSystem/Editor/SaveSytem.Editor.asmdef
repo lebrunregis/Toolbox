@@ -1,10 +1,10 @@
 {
-    "name": "SaveSystem.Data",
-    "rootNamespace": "",
-    "references": [
-        "GUID:13a42345703ba264ea72a31060e136aa"
+    "name": "SaveSytem.Editor",
+    "rootNamespace": "SaveSytem.Editor",
+    "references": [],
+    "includePlatforms": [
+        "Editor"
     ],
-    "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,

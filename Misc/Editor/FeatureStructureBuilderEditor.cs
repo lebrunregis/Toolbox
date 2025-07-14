@@ -8,7 +8,7 @@ public class FeatureFolderStructureBuilderEditor : EditorWindow
     public string editorWindowText = "Choose a feature name: ";
 
     public string dataPath = Application.dataPath;
-    public string featureStorePath = AssetDatabase.GetAssetPath(Selection.activeObject);
+    public string featureStorePath = "";
     private string featureName = "";
     private bool makeData = true;
     private bool makeEditor = true;
@@ -28,6 +28,11 @@ public class FeatureFolderStructureBuilderEditor : EditorWindow
         public string rootNamespace;
         public string[] references;
         public string[] includePlatforms;
+    }
+
+    private void OnEnable()
+    {
+        featureStorePath = AssetDatabase.GetAssetPath(Selection.activeObject);
     }
 
 
@@ -68,20 +73,20 @@ public class FeatureFolderStructureBuilderEditor : EditorWindow
     private void CreateAssemblies(string featureName, bool makeData, bool makeEditor, bool makeRuntime)
     {
         Debug.Log("Creating Feature Assemblies");
-        string systemFeatureStorePath = Path.Combine(Application.dataPath, featureStorePath);
+        string systemFeatureStorePath = featureStorePath;
         if (makeData)
-            CreateAssembly(systemFeatureStorePath, featureName, "Data", new string[] { }, new string[] { });
+            CreateAssembly(featureStorePath, featureName, "Data", new string[] { }, new string[] { });
         if (makeRuntime)
-            CreateAssembly(systemFeatureStorePath, featureName, "Runtime", new string[] { }, new string[] { });
+            CreateAssembly(featureStorePath, featureName, "Runtime", new string[] { }, new string[] { });
         if (makeEditor)
-            CreateAssembly(systemFeatureStorePath, featureName, "Editor", new string[] { "Editor" }, new string[] { });
+            CreateAssembly(featureStorePath, featureName, "Editor", new string[] { "Editor" }, new string[] { });
 
     }
 
     private void CreateAssembly(string systemFeatureStorePath, string featureName, string subfolder, string[] includePlatforms, string[] references)
     {
 
-        string JsonPath = Path.Combine(systemFeatureStorePath, featureName, subfolder, $"{featureName}.{subfolder}.asmdef");
+        string JsonPath = Path.Combine(featureStorePath, featureName, subfolder, $"{featureName}.{subfolder}.asmdef");
         AssemblyDefinition asmdef = new()
         {
             name = $"{featureName}.{subfolder}",
@@ -95,16 +100,13 @@ public class FeatureFolderStructureBuilderEditor : EditorWindow
 
     private void CreateNewProject(string featureName, bool makeData, bool makeEditor, bool makeRuntime)
     {
-        Debug.Log("Creating Feature Folders");
-        string systemFeatureStorePath = Path.Combine(Application.dataPath, featureStorePath);
-        Debug.Log("Creating " + Path.Combine(systemFeatureStorePath, featureName));
-        Directory.CreateDirectory(Path.Combine(systemFeatureStorePath, featureName));
+        Directory.CreateDirectory(Path.Combine(featureStorePath, featureName));
         if (makeData)
-            Directory.CreateDirectory(Path.Combine(systemFeatureStorePath, featureName, "Data"));
+            Directory.CreateDirectory(Path.Combine(featureStorePath, featureName, "Data"));
         if (makeEditor)
-            Directory.CreateDirectory(Path.Combine(systemFeatureStorePath, featureName, "Editor"));
+            Directory.CreateDirectory(Path.Combine(featureStorePath, featureName, "Editor"));
         if (makeRuntime)
-            Directory.CreateDirectory(Path.Combine(systemFeatureStorePath, featureName, "Runtime"));
+            Directory.CreateDirectory(Path.Combine(featureStorePath, featureName, "Runtime"));
     }
 
 

@@ -1,13 +1,17 @@
 using Cysharp.Threading.Tasks;
 
-public interface IGameInitiator
+namespace Initiator.Runtime
 {
+    public interface IGameInitiator
+    {
 
-    abstract void Start();
+        abstract void Start();
 
-    abstract UniTask CreateObjects();
+        abstract UniTask CreateObjects();
 
-    abstract UniTask InitializeObjects();
+        abstract UniTask InitializeObjects();
 
-    abstract void BindObjects();
+        abstract void BindObjects();
+    }
+
 }
