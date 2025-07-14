@@ -8,13 +8,13 @@ public class FeatureFolderStructureBuilderEditor : EditorWindow
     public string editorWindowText = "Choose a feature name: ";
 
     public string dataPath = Application.dataPath;
-    public string featureStorePath = "_/Features";
+    public string featureStorePath = AssetDatabase.GetAssetPath(Selection.activeObject);
     private string featureName = "";
     private bool makeData = true;
     private bool makeEditor = true;
     private bool makeRuntime = true;
 
-    [MenuItem("Assets/Create/Feature", priority = 11)]
+    [MenuItem("Assets/Create/Scripting/Stuctured Assembly Definition", priority = 11)]
     private static void CreateStructure()
     {
         FeatureFolderStructureBuilderEditor window = ScriptableObject.CreateInstance<FeatureFolderStructureBuilderEditor>();
@@ -25,6 +25,7 @@ public class FeatureFolderStructureBuilderEditor : EditorWindow
     public class AssemblyDefinition
     {
         public string name;
+        public string rootNamespace;
         public string[] references;
         public string[] includePlatforms;
     }
@@ -69,27 +70,24 @@ public class FeatureFolderStructureBuilderEditor : EditorWindow
         Debug.Log("Creating Feature Assemblies");
         string systemFeatureStorePath = Path.Combine(Application.dataPath, featureStorePath);
         if (makeData)
-            CreateAssembly(systemFeatureStorePath, featureName, "Data");
-        if (makeEditor)
-            CreateAssembly(systemFeatureStorePath, featureName, "Editor");
+            CreateAssembly(systemFeatureStorePath, featureName, "Data", new string[] { }, new string[] { });
         if (makeRuntime)
-            CreateAssembly(systemFeatureStorePath, featureName, "Runtime");
+            CreateAssembly(systemFeatureStorePath, featureName, "Runtime", new string[] { }, new string[] { });
+        if (makeEditor)
+            CreateAssembly(systemFeatureStorePath, featureName, "Editor", new string[] { "Editor" }, new string[] { });
+
     }
 
-    private void CreateAssembly(string systemFeatureStorePath, string featureName, string subfolder)
+    private void CreateAssembly(string systemFeatureStorePath, string featureName, string subfolder, string[] includePlatforms, string[] references)
     {
-        string JsonPath = Path.Combine(systemFeatureStorePath, featureName, subfolder, $"{featureName}.asmdef");
+
+        string JsonPath = Path.Combine(systemFeatureStorePath, featureName, subfolder, $"{featureName}.{subfolder}.asmdef");
         AssemblyDefinition asmdef = new()
         {
             name = $"{featureName}.{subfolder}",
-            references = new string[]
-            {
-
-            },
-            includePlatforms = new string[]
-            {
-
-            }
+            rootNamespace = $"{featureName}.{subfolder}",
+            references = references,
+            includePlatforms = includePlatforms
         };
         File.WriteAllText(JsonPath, JsonUtility.ToJson(asmdef));
         Debug.Log("Assembly created at " + JsonPath);

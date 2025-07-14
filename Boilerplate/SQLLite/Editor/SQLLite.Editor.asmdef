@@ -1,12 +1,8 @@
 {
-    "name": "Misc.Editor",
-    "rootNamespace": "Misc.Editor",
-    "references": [
-        "Paps.UnityToolbarExtenderUIToolkit"
-    ],
-    "includePlatforms": [
-        "Editor"
-    ],
+    "name": "SQLLite.Editor",
+    "rootNamespace": "SQLLite.Editor",
+    "references": [],
+    "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,

@@ -1,12 +1,10 @@
 {
-    "name": "Misc.Editor",
-    "rootNamespace": "Misc.Editor",
+    "name": "SaveSystem.Data",
+    "rootNamespace": "",
     "references": [
-        "Paps.UnityToolbarExtenderUIToolkit"
+        "GUID:f27b3a58e728ef74f9dd62e07b2b867b"
     ],
-    "includePlatforms": [
-        "Editor"
-    ],
+    "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,

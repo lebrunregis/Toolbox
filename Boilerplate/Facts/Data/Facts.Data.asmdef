@@ -1,12 +1,8 @@
 {
-    "name": "Misc.Editor",
-    "rootNamespace": "Misc.Editor",
-    "references": [
-        "Paps.UnityToolbarExtenderUIToolkit"
-    ],
-    "includePlatforms": [
-        "Editor"
-    ],
+    "name": "Facts.Data",
+    "rootNamespace": "Facts.Data",
+    "references": [],
+    "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,

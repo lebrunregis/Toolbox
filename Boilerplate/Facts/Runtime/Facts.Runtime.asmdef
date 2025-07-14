@@ -1,12 +1,12 @@
 {
-    "name": "Misc.Editor",
-    "rootNamespace": "Misc.Editor",
+    "name": "Facts.Runtime",
+    "rootNamespace": "Facts.Runtime",
     "references": [
-        "Paps.UnityToolbarExtenderUIToolkit"
+        "Update.Runtime",
+        "Facts.Data",
+        "SaveSystem.Data"
     ],
-    "includePlatforms": [
-        "Editor"
-    ],
+    "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,

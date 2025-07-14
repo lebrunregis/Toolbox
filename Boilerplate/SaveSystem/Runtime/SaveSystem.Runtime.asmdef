@@ -1,12 +1,12 @@
 {
-    "name": "Misc.Editor",
-    "rootNamespace": "Misc.Editor",
+    "name": "SaveSystem.Runtime",
+    "rootNamespace": "SaveSystem.Runtime",
     "references": [
-        "Paps.UnityToolbarExtenderUIToolkit"
+        "GUID:f27b3a58e728ef74f9dd62e07b2b867b",
+        "GUID:ad0937b8ee523d94fb76594650e0db8e",
+        "GUID:d4fa3a3b54a9f6b4dbcee9b958d01eae"
     ],
-    "includePlatforms": [
-        "Editor"
-    ],
+    "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,

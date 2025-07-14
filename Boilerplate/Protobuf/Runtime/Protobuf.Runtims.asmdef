@@ -1,12 +1,10 @@
 {
-    "name": "Misc.Editor",
-    "rootNamespace": "Misc.Editor",
+    "name": "Protobuf.Runtime",
+    "rootNamespace": "Protobuf.Runtime",
     "references": [
-        "Paps.UnityToolbarExtenderUIToolkit"
+        "GUID:8b608b8e82fbea94fbd06f3acb64d6a3"
     ],
-    "includePlatforms": [
-        "Editor"
-    ],
+    "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
