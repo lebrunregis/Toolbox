@@ -1,0 +1,16 @@
+{
+    "name": "Platformization.Runtime",
+    "rootNamespace": "Platformization.Runtime",
+    "references": [
+        "GUID:ebfd2e0e9482f104a8faf662215eceaa"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

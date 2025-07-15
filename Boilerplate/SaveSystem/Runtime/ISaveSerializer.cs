@@ -1,10 +1,8 @@
-using UnityEngine;
-
 namespace SaveSystem.Runtime
 {
     public interface ISaveSerializer
     {
-    public void Serialize(string path, SaveFile file );
-        public void Deserialize( string path, out SaveFile file );
+        void Serialize(string path, SaveFile file);
+        void Deserialize(out SaveFile file, SaveSlot slot, string stateId);
     }
 }
