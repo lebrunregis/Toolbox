@@ -10,7 +10,7 @@ namespace SaveSystem.Runtime
             Dictionary<U, IFact<T>>.Enumerator enumerator = factDictionary._facts.GetEnumerator();
             while (enumerator.MoveNext())
             {
-                if (enumerator.Current.Value.PersistanceState == Facts.Data.FactPersistenceEnum.Serialized)
+                if (enumerator.Current.Value.Persistance == Facts.Data.FactPersistenceEnum.Serialize)
                 {
                     KeyValuePair<U, T> node = new(enumerator.Current.Key, enumerator.Current.Value.Value());
                     factList.AddLast(node);
@@ -23,7 +23,7 @@ namespace SaveSystem.Runtime
             var e = factsList.GetEnumerator();
             while (e.MoveNext())
             {
-                factDictionary._facts.Add(e.Current.Key, new Fact<T2>(e.Current.Value, Facts.Data.FactPersistenceEnum.Serialized));
+                factDictionary._facts.Add(e.Current.Key, new Fact<T2>(e.Current.Value, Facts.Data.FactPersistenceEnum.Serialize));
             }
         }
     }

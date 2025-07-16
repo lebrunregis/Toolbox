@@ -1,8 +1,8 @@
-using Rigidbody.Runtime;
+using Toolbox.Rigidbody.Runtime;
 using UnityEngine;
 using static UnityEngine.InputSystem.InputAction;
 
-namespace RigidBody.Runtime
+namespace Toolbox.RigidBody.Runtime
 {
     public class DragAndDrop : MonoBehaviour
     {

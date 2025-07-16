@@ -1,0 +1,16 @@
+{
+    "name": "Settings.Runtime",
+    "rootNamespace": "Settings.Runtime",
+    "references": [
+        "GUID:85f527d671ec89c4d8eb2c807fa7c4e8"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

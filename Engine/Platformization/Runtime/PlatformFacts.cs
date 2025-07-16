@@ -1,11 +1,12 @@
 using System.Collections.Generic;
 using SaveSystem.Runtime;
-using UnityEngine;
+using UnityEngine.TextCore;
 
 namespace Platformization.Runtime
 {
     public class PlatformFacts
     {
-        private Dictionary<string, FactDictionary<string, Texture2D>> glyphs;
+        private Dictionary<string, FactDictionary<string, Glyph>> glyphs;
+
     }
 }

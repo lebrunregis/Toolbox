@@ -1,11 +1,9 @@
-using UnityEngine;
-
 namespace Platformization.Editor
 {
-    using UnityEditor;
-    using UnityEngine;
     using System.Reflection;
+    using UnityEditor;
     using UnityEditor.U2D;
+    using UnityEngine;
     using UnityEngine.U2D;
 
     public class SpriteAtlasPreview : EditorWindow

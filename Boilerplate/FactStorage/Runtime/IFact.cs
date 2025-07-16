@@ -1,4 +1,5 @@
 ﻿using Facts.Data;
+using FactStorage.Data;
 
 namespace SaveSystem.Runtime
 {
@@ -7,6 +8,7 @@ namespace SaveSystem.Runtime
     {
         T Value();
         void Value(T value);
-        FactPersistenceEnum PersistanceState { get; }
+        FactPersistenceEnum Persistance { get; }
+        FactScopeEnum Scope { get; }
     }
 }

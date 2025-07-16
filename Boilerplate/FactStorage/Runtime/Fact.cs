@@ -1,23 +1,25 @@
 
 using System;
 using Facts.Data;
+using FactStorage.Data;
 using SaveSystem.Runtime;
 
 namespace Facts.Runtime
 {
     public class Fact<T> : IFact<T>// where T : ISerializationCallbackReceiver
     {
-        private FactPersistenceEnum persistanceState;
         public T value;
-        private readonly Type type;
-        public FactPersistenceEnum PersistanceState { get => persistanceState; set => persistanceState = value; }
-        public Type Type { get => type; }
+       public FactPersistenceEnum Persistance { get ; set ; }
+        public Type Type { get; }
+        public FactScopeEnum Scope { get; set ; }
+        public T DefaultValue { get; set ; }
 
-        public Fact(T fact, FactPersistenceEnum persistence = FactPersistenceEnum.Runtime)
+        public Fact(T fact, FactPersistenceEnum persistence = FactPersistenceEnum.Runtime, FactScopeEnum scope = FactScopeEnum.Project)
         {
             value = fact;
-            PersistanceState = persistence;
-            type = typeof(T);
+            Persistance = persistence;
+            Type = typeof(T);
+            Scope = scope;
         }
 
         public T Value()
@@ -28,6 +30,11 @@ namespace Facts.Runtime
         public void Value(T newValue)
         {
             value = newValue;
+        }
+
+        public void ResetValue()
+        {
+            value = DefaultValue;
         }
     }
 }

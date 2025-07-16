@@ -1,5 +1,6 @@
 // PromptFont by Yukari "Shinmera" Hafner, accessible at https://shinmera.com/promptfont
-public static class PromptFont {
+public static class PromptFont
+{
     public const string ASCII_BANG = "!";
     public const int ASCII_BANG_INT = 0x00021;
     public const string ASCII_DOUBLEQUOTE = "\"";
@@ -951,10 +952,12 @@ public static class PromptFont {
     public const string ICON_SHOPPING_CART = "🛒";
     public const int ICON_SHOPPING_CART_INT = 0x1F6D2;
 
-    static string Get(string name){
-      return (string)(typeof(PromptFont).GetProperty(name).GetValue(null));
+    private static string Get(string name)
+    {
+        return (string)(typeof(PromptFont).GetProperty(name).GetValue(null));
     }
-    static int GetInt(string name){
-      return (int)(typeof(PromptFont).GetProperty(name+"_INT").GetValue(null));
+    private static int GetInt(string name)
+    {
+        return (int)(typeof(PromptFont).GetProperty(name + "_INT").GetValue(null));
     }
 }

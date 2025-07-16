@@ -4,7 +4,7 @@ namespace Facts.Data
     {
         Scene,
         Runtime,
-        Serialized,
+        Serialize,
         Database
     }
 }
