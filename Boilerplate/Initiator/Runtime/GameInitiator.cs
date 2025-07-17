@@ -1,8 +1,11 @@
 using Cysharp.Threading.Tasks;
+using DataStore.Runtime;
 namespace Initiator.Runtime
 {
     public class GameInitiator : IGameInitiator
     {
+
+        private DataManager dataManager;
         public void BindObjects()
         {
             throw new System.NotImplementedException();

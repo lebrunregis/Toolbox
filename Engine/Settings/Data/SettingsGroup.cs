@@ -6,7 +6,7 @@ namespace Settings.Data
     {
         public string Name { get; set; }
 
-        public Dictionary<string, ISettingTypeGetter> GetSettings => throw new System.NotImplementedException();
+        Dictionary<string, ISettingTypeGetter> ISettingsGroup.Settings => Settings;
 
         public Dictionary<string, ISettingTypeGetter> Settings = new();
     }
