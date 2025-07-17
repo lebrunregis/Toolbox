@@ -5,13 +5,13 @@ namespace DataStore.Runtime
     [Serializable]
     public sealed class PackageDataRepository : FileDataRepository
     {
-        public PackageDataRepository(string package, string name) : base(GetSettingsPath(package, name))
+        public PackageDataRepository(string package, string name) : base(GetDataPath(package, name))
         {
         }
 
-        public static string GetSettingsPath(string packageName, string name = "Settings")
+        public static string GetDataPath(string packageName, string name = "Data")
         {
-            return string.Format("{0}/{1}/{2}.json", k_PackageDataDirectory, packageName, name);
+            return string.Format("{0}/{1}/{2}.json", GameDataPath, packageName, name);
         }
     }
 }
