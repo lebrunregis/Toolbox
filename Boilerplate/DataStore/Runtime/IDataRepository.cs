@@ -12,6 +12,5 @@ namespace DataStore.Runtime
         void Remove<T>(string key);
         void Save();
         void Set<T>(string key, T value);
-        // T[] ToArray<T>();
     }
 }

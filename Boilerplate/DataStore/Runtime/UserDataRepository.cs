@@ -3,7 +3,7 @@ using UnityEditor;
 
 namespace DataStore.Runtime
 {
-    public class UserDataRepository : IDataRepository
+    public class UserDataRepository
     {
         private static string GetEditorPrefKey<T>(string key)
         {
@@ -31,7 +31,7 @@ namespace DataStore.Runtime
                 EditorPrefs.SetString(k, DataWrapper<T>.Serialize(value));
         }
 
-        private static T GetEditorPref<T>(string key, T fallback = default(T))
+        private static T GetEditorPref<T>(string key, T fallback = default)
         {
             var k = GetEditorPrefKey<T>(key);
 
@@ -71,6 +71,7 @@ namespace DataStore.Runtime
 
         public void Save()
         {
+            //Saves realtime so do nothing
         }
 
         public void Set<T>(string key, T value)

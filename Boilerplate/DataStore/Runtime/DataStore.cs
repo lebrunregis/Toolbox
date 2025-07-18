@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using DataStore.Data;
 using UnityEngine;
 
@@ -7,7 +8,7 @@ namespace DataStore.Runtime
 {
     public class DataStore
     {
-        private Dictionary<DataScopeEnum, IDataRepository> m_dataRepositories;
+        private readonly Dictionary<DataCategoryEnum, IDataRepository> repositories = new();
         public event Action BeforeSettingsSaved;
         public event Action AfterSettingsSaved;
 
@@ -15,26 +16,27 @@ namespace DataStore.Runtime
         {
         }
 
-        public DataStore(string package, string dataFileName = "Data")
+        public DataStore(string package, DataCategoryEnum category = DataCategoryEnum.None, string dataFileName = "Data")
         {
-            m_dataRepositories.Add(DataScopeEnum.Project, new PackageDataRepository(package, dataFileName));
-            m_dataRepositories.Add(DataScopeEnum.User, new UserDataRepository());
+            repositories.Add(category, new DataRepository(package, dataFileName));
+
         }
-        public DataStore(IEnumerable<IDataRepository> repositories)
+        public DataStore(IEnumerable<KeyValuePair<DataCategoryEnum, IDataRepository>> repo)
         {
-            // m_dataRepositories = repositories.ToArray();
+
+            repositories = repo.ToDictionary(pair => pair.Key, pair => pair.Value);
         }
 
-        public IDataRepository GetRepository(DataScopeEnum scope)
+        public IDataRepository GetRepository(DataCategoryEnum scope)
         {
-            m_dataRepositories.TryGetValue(scope, out var repository);
+            repositories.TryGetValue(scope, out IDataRepository repository);
             return repository;
         }
 
 
         public IDataRepository GetRepository(DataScopeEnum scope, string name)
         {
-            foreach (var repo in m_dataRepositories.Values)
+            foreach (IDataRepository repo in repositories.Values)
                 if (repo.Scope == scope && string.Equals(repo.Name, name))
                     return repo;
             return null;
@@ -44,7 +46,7 @@ namespace DataStore.Runtime
         {
             BeforeSettingsSaved?.Invoke();
 
-            foreach (var repo in m_dataRepositories.Values)
+            foreach (IDataRepository repo in repositories.Values)
                 repo.Save();
 
             AfterSettingsSaved?.Invoke();
@@ -52,23 +54,23 @@ namespace DataStore.Runtime
 
         public void Set<T>(string key, T value, DataScopeEnum scope = DataScopeEnum.Project)
         {
-            if (scope == DataScopeEnum.Project)
-                Set<T, PackageDataRepository>(key, value);
-            Set<T, UserDataRepository>(key, value);
+
+            Set<T, DataRepository>(key, value);
+
         }
 
         public void Set<T>(string key, T value, string repositoryName, DataScopeEnum scope = DataScopeEnum.Project)
         {
-            if (scope == DataScopeEnum.Project)
-                Set<T, PackageDataRepository>(key, value, repositoryName);
-            Set<T, UserDataRepository>(key, value, repositoryName);
+
+            Set<T, DataRepository>(key, value, repositoryName);
+
         }
 
         public void Set<T, K>(string key, T value, string repositoryName = null) where K : IDataRepository
         {
             bool foundScopeRepository = false;
 
-            foreach (var repo in m_dataRepositories.Values)
+            foreach (IDataRepository repo in repositories.Values)
             {
                 if (repo is K && (string.IsNullOrEmpty(repositoryName) || repo.Name == repositoryName))
                 {
@@ -83,21 +85,21 @@ namespace DataStore.Runtime
 
         public T Get<T>(string key, DataScopeEnum scope = DataScopeEnum.Project, T fallback = default)
         {
-            if (scope == DataScopeEnum.Project)
-                return Get<T, PackageDataRepository>(key, fallback);
-            return Get<T, UserDataRepository>(key, fallback);
+
+            return Get<T, DataRepository>(key, fallback);
+
         }
 
         public T Get<T>(string key, string repositoryName, DataScopeEnum scope = DataScopeEnum.Project, T fallback = default)
         {
-            if (scope == DataScopeEnum.Project)
-                return Get<T, PackageDataRepository>(key, fallback, repositoryName);
-            return Get<T, UserDataRepository>(key, fallback, repositoryName);
+
+            return Get<T, DataRepository>(key, fallback, repositoryName);
+
         }
 
         public T Get<T, K>(string key, T fallback = default, string repositoryName = null) where K : IDataRepository
         {
-            foreach (var repo in m_dataRepositories.Values)
+            foreach (IDataRepository repo in repositories.Values)
             {
                 if (repo is K && (string.IsNullOrEmpty(repositoryName) || repo.Name == repositoryName))
                     return repo.Get<T>(key, fallback);
@@ -109,21 +111,21 @@ namespace DataStore.Runtime
 
         public bool ContainsKey<T>(string key, DataScopeEnum scope = DataScopeEnum.Project)
         {
-            if (scope == DataScopeEnum.Project)
-                return ContainsKey<T, PackageDataRepository>(key);
-            return ContainsKey<T, UserDataRepository>(key);
+
+            return ContainsKey<T, DataRepository>(key);
+
         }
 
         public bool ContainsKey<T>(string key, string repositoryName, DataScopeEnum scope = DataScopeEnum.Project)
         {
-            if (scope == DataScopeEnum.Project)
-                return ContainsKey<T, PackageDataRepository>(key, repositoryName);
-            return ContainsKey<T, UserDataRepository>(key, repositoryName);
+
+            return ContainsKey<T, DataRepository>(key, repositoryName);
+
         }
 
         public bool ContainsKey<T, K>(string key, string repositoryName = null) where K : IDataRepository
         {
-            foreach (var repo in m_dataRepositories.Values)
+            foreach (IDataRepository repo in repositories.Values)
             {
                 if (repo is K && (string.IsNullOrEmpty(repositoryName) || repositoryName == repo.Name))
                     return repo.ContainsKey<T>(key);
@@ -135,23 +137,23 @@ namespace DataStore.Runtime
 
         public void DeleteKey<T>(string key, DataScopeEnum scope = DataScopeEnum.Project)
         {
-            if (scope == DataScopeEnum.Project)
-                DeleteKey<T, PackageDataRepository>(key);
-            DeleteKey<T, UserDataRepository>(key);
+
+            DeleteKey<T, DataRepository>(key);
+
         }
 
         public void DeleteKey<T>(string key, string repositoryName, DataScopeEnum scope = DataScopeEnum.Project)
         {
-            if (scope == DataScopeEnum.Project)
-                DeleteKey<T, PackageDataRepository>(key, repositoryName);
-            DeleteKey<T, UserDataRepository>(key, repositoryName);
+
+            DeleteKey<T, DataRepository>(key, repositoryName);
+
         }
 
         public void DeleteKey<T, K>(string key, string repositoryName = null) where K : IDataRepository
         {
             bool foundScopeRepository = false;
 
-            foreach (var repo in m_dataRepositories.Values)
+            foreach (IDataRepository repo in repositories.Values)
             {
                 if (repo is K && (string.IsNullOrEmpty(repositoryName) || repositoryName == repo.Name))
                 {

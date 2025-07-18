@@ -10,8 +10,8 @@ namespace DataStore.Runtime
     public class FileDataRepository : IDataRepository
     {
 
-        protected const string GameDataPath = "ProjectData/Packages";
-        protected const string UserDataPath = "UserData/Packages";
+        protected const string GameDataPath = "Save";
+        protected const string UserDataPath = "UserData";
 
         private const bool k_PrettyPrintJson = true;
 
@@ -105,6 +105,7 @@ namespace DataStore.Runtime
             {
                 m_JsonHash = Hash128.Compute(json);
                 File.WriteAllText(Path, json);
+                Debug.Log("Writing " + Path);
             }
             catch (UnauthorizedAccessException)
             {
