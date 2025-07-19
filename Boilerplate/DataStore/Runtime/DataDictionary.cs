@@ -20,7 +20,7 @@ namespace DataStore.Runtime
         private List<DataKeyValuePair> m_DictionaryValues = new();
 #pragma warning restore 0649
 
-        internal Dictionary<Type, Dictionary<string, string>> dictionary = new Dictionary<Type, Dictionary<string, string>>();
+        internal Dictionary<Type, Dictionary<string, string>> dictionary = new();
 
         public bool ContainsKey<T>(string key)
         {

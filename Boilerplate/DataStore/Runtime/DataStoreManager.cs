@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace DataStore.Runtime
@@ -7,34 +8,27 @@ namespace DataStore.Runtime
 
         //user settings
         private static readonly UserDataRepository userDatastore = new();
-        //save slots
-        private static DataStore saveDatastore;
-        //game data for save slots (optional)
-        private static DataStore achievementStore;
-        //game difficulty settings
-        private static DataStore difficultyDatastore;
-
+        private static DataStore test;
+        private readonly List<KeyValuePair<DataCategoryEnum, string>> repoList = new()
+{
+    new KeyValuePair<DataCategoryEnum, string>(DataCategoryEnum.Audio, "Audio"),
+    new KeyValuePair<DataCategoryEnum, string>(DataCategoryEnum.Achievements, "Achievements"),
+    new KeyValuePair<DataCategoryEnum, string>(DataCategoryEnum.Difficulty, "Difficulty"),
+    new KeyValuePair<DataCategoryEnum, string>(DataCategoryEnum.Save, "Save"),
+    new KeyValuePair<DataCategoryEnum, string>(DataCategoryEnum.Graphics,"Graphics"),
+    new KeyValuePair<DataCategoryEnum, string>(DataCategoryEnum.GameState,"GameState"),
+};
         private void OnEnable()
         {
             Debug.Log("Opening Data Stores");
-            saveDatastore = new DataStore("Save", DataCategoryEnum.Save, "AutoSave");
-            achievementStore = new DataStore("Achievements", DataCategoryEnum.Achievements, "Achievements");
-            difficultyDatastore = new DataStore("Difficulty", DataCategoryEnum.Settings, "Easy");
-
+            test = new DataStore($"{Application.dataPath}/Save", repoList);
         }
 
-        public DataStore CurrentSaveSlot()
-        {
-            return saveDatastore;
-        }
 
         private void OnDisable()
         {
-            Debug.Log("Saving Data Stores");
-            userDatastore.Save();
-            saveDatastore.Save();
-            achievementStore.Save();
-            difficultyDatastore.Save();
+            Debug.Log("Saving Data Store");
+            test.Save();
 
         }
     }

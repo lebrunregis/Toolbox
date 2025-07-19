@@ -4,7 +4,7 @@ namespace DataStore.Runtime
     {
         None,
         Save,
-        Settings,
+        Difficulty,
         Audio,
         Graphics,
         GameState,

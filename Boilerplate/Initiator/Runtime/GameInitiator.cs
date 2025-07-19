@@ -5,7 +5,7 @@ namespace Initiator.Runtime
     public class GameInitiator : IGameInitiator
     {
 
-        private DataManager dataManager;
+        private readonly DataManager dataManager;
         public void BindObjects()
         {
             throw new System.NotImplementedException();

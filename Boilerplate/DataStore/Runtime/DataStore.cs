@@ -1,7 +1,7 @@
+using DataStore.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using DataStore.Data;
 using UnityEngine;
 
 namespace DataStore.Runtime
@@ -16,15 +16,15 @@ namespace DataStore.Runtime
         {
         }
 
-        public DataStore(string package, DataCategoryEnum category = DataCategoryEnum.None, string dataFileName = "Data")
+        public DataStore(string path, DataCategoryEnum category = DataCategoryEnum.None, string dataFileName = "Data")
         {
-            repositories.Add(category, new DataRepository(package, dataFileName));
+            repositories.Add(category, new DataRepository(path, dataFileName));
 
         }
-        public DataStore(IEnumerable<KeyValuePair<DataCategoryEnum, IDataRepository>> repo)
+        public DataStore(string path, IEnumerable<KeyValuePair<DataCategoryEnum, string>> repo)
         {
 
-            repositories = repo.ToDictionary(pair => pair.Key, pair => pair.Value);
+            repositories = repo.ToDictionary(pair => pair.Key, pair => (IDataRepository)new DataRepository(path, pair.Value));
         }
 
         public IDataRepository GetRepository(DataCategoryEnum scope)

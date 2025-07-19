@@ -9,9 +9,9 @@ namespace DataStore.Runtime
         {
         }
 
-        public static string GetDataPath(string packageName, string name = "Data")
+        public static string GetDataPath(string Path, string name = "Data")
         {
-            return $"{GameDataPath}/{packageName}/{name}.json";
+            return $"{Path}/{name}.json";
         }
     }
 }

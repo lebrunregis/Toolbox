@@ -1,6 +1,6 @@
+using DataStore.Data;
 using System;
 using System.IO;
-using DataStore.Data;
 using UnityEditor;
 using UnityEngine;
 
@@ -10,19 +10,16 @@ namespace DataStore.Runtime
     public class FileDataRepository : IDataRepository
     {
 
-        protected const string GameDataPath = "Save";
-        protected const string UserDataPath = "UserData";
-
         private const bool k_PrettyPrintJson = true;
 
         private bool m_Initialized;
-        private readonly string m_Path;
+        private readonly string path;
         [SerializeField]
         private DataDictionary m_Dictionary = new();
         private Hash128 m_JsonHash;
         public FileDataRepository(string path)
         {
-            m_Path = path;
+            this.path = path;
             m_Initialized = false;
             AssemblyReloadEvents.beforeAssemblyReload += Save;
             EditorApplication.quitting += Save;
@@ -49,7 +46,7 @@ namespace DataStore.Runtime
 
         public string Path
         {
-            get { return m_Path; }
+            get { return path; }
         }
 
         public string Name => System.IO.Path.GetFileNameWithoutExtension(Path);
