@@ -1,9 +1,10 @@
 {
-    "name": "DataStore.Runtime",
-    "rootNamespace": "DataStore.Runtime",
+    "name": "Paint.Runtime",
+    "rootNamespace": "Paint.Runtime",
     "references": [
-        "GUID:13a42345703ba264ea72a31060e136aa",
-        "GUID:4a03ca78fbbf223419e5a3f628bbab87"
+        "GUID:b97337eaf105bcf4f8564785bbd04458",
+        "GUID:4a03ca78fbbf223419e5a3f628bbab87",
+        "GUID:4ed25ef8297059449b9b04603f66053d"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -1,4 +1,5 @@
 using DataStore.Data;
+using Facts.Runtime;
 using UnityEditor;
 
 namespace DataStore.Runtime
@@ -69,10 +70,6 @@ namespace DataStore.Runtime
             get { return string.Empty; }
         }
 
-        public void Save()
-        {
-            //Saves realtime so do nothing
-        }
 
         public void Set<T>(string key, T value)
         {

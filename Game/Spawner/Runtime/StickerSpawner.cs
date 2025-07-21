@@ -58,7 +58,7 @@ public class StickerSpawner : MonoBehaviour
             {
                 if (hit.collider.gameObject == transform.gameObject)
                 {
-                    Debug.Log("Hit found, placing sticker");
+                    UnityEngine.Debug.Log("Hit found, placing sticker");
                     int stickerIndex = Random.Range(0, stickers.Count - 1);
                     GameObject instance = Instantiate(stickers[stickerIndex]);
                     instance.transform.SetParent(transform);

@@ -1,8 +1,6 @@
-using UnityEngine;
-
 namespace UpdatePublisher.Runtime
 {
-    public abstract class ManagedBehaviour : MonoBehaviour, IUpdateObserver
+    public abstract class ManagedBehaviour : DebugBehaviour.Runtime.VerboseMonoBehaviour, IUpdateObserver
     {
         private void OnEnable()
         {

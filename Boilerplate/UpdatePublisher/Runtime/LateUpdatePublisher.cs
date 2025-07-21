@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace UpdatePublisher.Runtime
 {
-    public class LateUpdatePublisher : MonoBehaviour, ILateUpdateManager
+    public class LateUpdatePublisher : DebugBehaviour.Runtime.VerboseMonoBehaviour, ILateUpdateManager
     {
         private readonly List<IUpdateObserver> _observers = new();
         private void LateUpdate()

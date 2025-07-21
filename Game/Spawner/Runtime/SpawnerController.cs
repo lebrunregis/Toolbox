@@ -31,12 +31,12 @@ public class SpawnerController<T> : MonoBehaviour where T : IPool
     {
         if (spawnLocations.Count == 0)
         {
-            Debug.Log("No spawn set! Disabling self.");
+            UnityEngine.Debug.Log("No spawn set! Disabling self.");
         }
 
         if (objectPool == null)
         {
-            Debug.Log("No object pool set! Disabling self.");
+            UnityEngine.Debug.Log("No object pool set! Disabling self.");
         }
     }
 
@@ -57,7 +57,7 @@ public class SpawnerController<T> : MonoBehaviour where T : IPool
         }
         if (activeObjects.Count == 0 && !repeater.isActiveAndEnabled)
         {
-            Debug.Log("Starting new wave");
+            UnityEngine.Debug.Log("Starting new wave");
             StartNewWave();
         }
     }
@@ -86,11 +86,11 @@ public class SpawnerController<T> : MonoBehaviour where T : IPool
 
             go.SetActive(true);
             ApplyRigibodySettings(go);
-            Debug.Log("Activating gameObject");
+            UnityEngine.Debug.Log("Activating gameObject");
         }
         else
         {
-            Debug.Log("Over Pool limit!");
+            UnityEngine.Debug.Log("Over Pool limit!");
         }
     }
 
@@ -145,7 +145,7 @@ public class SpawnerController<T> : MonoBehaviour where T : IPool
     {
         go.transform.position = spawnLocations[spawnId].position + new Vector3(Random.Range(-spawnSpread, spawnSpread), Random.Range(-spawnSpread, spawnSpread), 0);
         go.transform.rotation = spawnLocations[spawnId].rotation;
-        Debug.Log("Activated spawned object");
+        UnityEngine.Debug.Log("Activated spawned object");
         go.SetActive(true);
     }
 }

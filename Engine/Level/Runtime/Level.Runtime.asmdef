@@ -2,7 +2,8 @@
     "name": "Level.Runtime",
     "rootNamespace": "Level.Runtime",
     "references": [
-        "GUID:af74f5a198de4e1438cf3f90c68a5f5b"
+        "GUID:af74f5a198de4e1438cf3f90c68a5f5b",
+        "GUID:4a03ca78fbbf223419e5a3f628bbab87"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

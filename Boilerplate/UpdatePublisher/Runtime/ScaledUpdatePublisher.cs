@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace UpdatePublisher.Runtime
 {
-    public class ScaledUpdatePublisher : MonoBehaviour, IUpdatePublisher
+    public class ScaledUpdatePublisher : DebugBehaviour.Runtime.VerboseMonoBehaviour, IUpdatePublisher
     {
         private readonly List<IUpdateObserver> _observers = new();
         public float timeScale;

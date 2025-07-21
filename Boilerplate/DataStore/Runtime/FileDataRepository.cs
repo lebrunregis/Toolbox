@@ -12,34 +12,34 @@ namespace DataStore.Runtime
 
         private const bool k_PrettyPrintJson = true;
 
-        private bool m_Initialized;
+        private bool initialized;
         private readonly string path;
         [SerializeField]
-        private DataDictionary m_Dictionary = new();
-        private Hash128 m_JsonHash;
+        private DataDictionary dictionary = new();
+        private Hash128 jsonHash;
         public FileDataRepository(string path)
         {
             this.path = path;
-            m_Initialized = false;
+            initialized = false;
             AssemblyReloadEvents.beforeAssemblyReload += Save;
             EditorApplication.quitting += Save;
         }
 
         private void Init()
         {
-            if (m_Initialized)
+            if (initialized)
                 return;
 
-            m_Initialized = true;
+            initialized = true;
 
             if (TryLoadSavedJson(out string json))
             {
-                m_Dictionary = null;
-                m_JsonHash = Hash128.Compute(json);
+                dictionary = null;
+                jsonHash = Hash128.Compute(json);
                 EditorJsonUtility.FromJsonOverwrite(json, this);
             }
 
-            m_Dictionary ??= new DataDictionary();
+            dictionary ??= new DataDictionary();
         }
 
         public virtual DataScopeEnum Scope => DataScopeEnum.Project;
@@ -80,7 +80,7 @@ namespace DataStore.Runtime
             string json = EditorJsonUtility.ToJson(this, k_PrettyPrintJson);
 
             // While unlikely, a hash collision is possible. Always test the actual saved contents before early exit.
-            if (m_JsonHash == Hash128.Compute(json)
+            if (jsonHash == Hash128.Compute(json)
                 && TryLoadSavedJson(out string existing)
                 && existing.Equals(json))
                 return;
@@ -100,7 +100,7 @@ namespace DataStore.Runtime
 
             try
             {
-                m_JsonHash = Hash128.Compute(json);
+                jsonHash = Hash128.Compute(json);
                 File.WriteAllText(Path, json);
                 Debug.Log("Writing " + Path);
             }
@@ -113,25 +113,25 @@ namespace DataStore.Runtime
         public void Set<T>(string key, T value)
         {
             Init();
-            m_Dictionary.Set<T>(key, value);
+            dictionary.Set<T>(key, value);
         }
 
         public T Get<T>(string key, T fallback = default)
         {
             Init();
-            return m_Dictionary.Get<T>(key, fallback);
+            return dictionary.Get<T>(key, fallback);
         }
 
         public bool ContainsKey<T>(string key)
         {
             Init();
-            return m_Dictionary.ContainsKey<T>(key);
+            return dictionary.ContainsKey<T>(key);
         }
 
         public void Remove<T>(string key)
         {
             Init();
-            m_Dictionary.Remove<T>(key);
+            dictionary.Remove<T>(key);
         }
     }
 }

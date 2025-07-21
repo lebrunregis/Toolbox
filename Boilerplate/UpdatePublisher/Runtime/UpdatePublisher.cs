@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace UpdatePublisher.Runtime
 {
-    public class UpdatePublisher : MonoBehaviour, IUpdatePublisher
+    public class UpdatePublisher : DebugBehaviour.Runtime.VerboseMonoBehaviour, IUpdatePublisher
     {
         private readonly List<IUpdateObserver> _observers = new();
         public void Update()

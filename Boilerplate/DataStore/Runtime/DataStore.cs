@@ -1,7 +1,6 @@
 using DataStore.Data;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace DataStore.Runtime
@@ -12,19 +11,15 @@ namespace DataStore.Runtime
         public event Action BeforeSettingsSaved;
         public event Action AfterSettingsSaved;
 
-        private DataStore()
+        public DataStore(string path, DataCategoryEnum repos)
         {
-        }
-
-        public DataStore(string path, DataCategoryEnum category = DataCategoryEnum.None, string dataFileName = "Data")
-        {
-            repositories.Add(category, new DataRepository(path, dataFileName));
-
-        }
-        public DataStore(string path, IEnumerable<KeyValuePair<DataCategoryEnum, string>> repo)
-        {
-
-            repositories = repo.ToDictionary(pair => pair.Key, pair => (IDataRepository)new DataRepository(path, pair.Value));
+            foreach (DataCategoryEnum flag in Enum.GetValues(typeof(DataCategoryEnum)))
+            {
+                if (repos.HasFlag(flag))
+                {
+                    repositories.Add(flag, new DataRepository(path, Enum.GetName(typeof(DataCategoryEnum), flag)));
+                }
+            }
         }
 
         public IDataRepository GetRepository(DataCategoryEnum scope)
@@ -52,61 +47,30 @@ namespace DataStore.Runtime
             AfterSettingsSaved?.Invoke();
         }
 
-        public void Set<T>(string key, T value, DataScopeEnum scope = DataScopeEnum.Project)
+        public void Set<T>(DataCategoryEnum category, string key, T value)
         {
-
-            Set<T, DataRepository>(key, value);
-
-        }
-
-        public void Set<T>(string key, T value, string repositoryName, DataScopeEnum scope = DataScopeEnum.Project)
-        {
-
-            Set<T, DataRepository>(key, value, repositoryName);
-
-        }
-
-        public void Set<T, K>(string key, T value, string repositoryName = null) where K : IDataRepository
-        {
-            bool foundScopeRepository = false;
-
-            foreach (IDataRepository repo in repositories.Values)
+            if (repositories.TryGetValue(category, out IDataRepository repository))
             {
-                if (repo is K && (string.IsNullOrEmpty(repositoryName) || repo.Name == repositoryName))
-                {
-                    repo.Set<T>(key, value);
-                    foundScopeRepository = true;
-                }
+                repository.Set(key, value);
+            }
+            else
+            {
+                Debug.LogError("Trying to save to an uninitialized save repository!");
+            }
+        }
+
+        public T Get<T>(DataCategoryEnum category, string key, T fallback = default)
+        {
+            if (repositories.TryGetValue(category, out IDataRepository repository))
+            {
+                return repository.Get<T>(key, fallback);
+            }
+            else
+            {
+                Debug.LogError("Trying to get from an uninitialized save repository!");
+                return fallback;
             }
 
-            if (!foundScopeRepository)
-                Debug.LogWarning($"No repository with type {typeof(K)} found.");
-        }
-
-        public T Get<T>(string key, DataScopeEnum scope = DataScopeEnum.Project, T fallback = default)
-        {
-
-            return Get<T, DataRepository>(key, fallback);
-
-        }
-
-        public T Get<T>(string key, string repositoryName, DataScopeEnum scope = DataScopeEnum.Project, T fallback = default)
-        {
-
-            return Get<T, DataRepository>(key, fallback, repositoryName);
-
-        }
-
-        public T Get<T, K>(string key, T fallback = default, string repositoryName = null) where K : IDataRepository
-        {
-            foreach (IDataRepository repo in repositories.Values)
-            {
-                if (repo is K && (string.IsNullOrEmpty(repositoryName) || repo.Name == repositoryName))
-                    return repo.Get<T>(key, fallback);
-            }
-
-            Debug.LogWarning($"No repository with type {typeof(K)} found.");
-            return fallback;
         }
 
         public bool ContainsKey<T>(string key, DataScopeEnum scope = DataScopeEnum.Project)
@@ -131,7 +95,7 @@ namespace DataStore.Runtime
                     return repo.ContainsKey<T>(key);
             }
 
-            Debug.LogWarning($"No repository with type {typeof(K)} found.");
+            UnityEngine.Debug.LogWarning($"No repository with type {typeof(K)} found.");
             return false;
         }
 
@@ -163,7 +127,7 @@ namespace DataStore.Runtime
             }
 
             if (!foundScopeRepository)
-                Debug.LogWarning($"No repository with type {typeof(K)} found.");
+                UnityEngine.Debug.LogWarning($"No repository with type {typeof(K)} found.");
         }
     }
 }

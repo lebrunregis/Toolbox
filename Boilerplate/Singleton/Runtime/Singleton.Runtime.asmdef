@@ -1,8 +1,7 @@
 {
-    "name": "DataStore.Runtime",
-    "rootNamespace": "DataStore.Runtime",
+    "name": "Singleton.Runtime",
+    "rootNamespace": "Singleton.Runtime",
     "references": [
-        "GUID:13a42345703ba264ea72a31060e136aa",
         "GUID:4a03ca78fbbf223419e5a3f628bbab87"
     ],
     "includePlatforms": [],

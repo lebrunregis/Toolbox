@@ -1,11 +1,13 @@
 {
-    "name": "DataStore.Runtime",
-    "rootNamespace": "DataStore.Runtime",
+    "name": "Paint.Editor",
+    "rootNamespace": "Paint.Editor",
     "references": [
-        "GUID:13a42345703ba264ea72a31060e136aa",
-        "GUID:4a03ca78fbbf223419e5a3f628bbab87"
+        "GUID:53eef6256f2ce9147bcf1159cb5cc414",
+        "GUID:30b5551b9801e0b41b31f3e19c9a0b1f"
     ],
-    "includePlatforms": [],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,

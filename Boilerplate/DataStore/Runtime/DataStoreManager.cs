@@ -1,34 +1,29 @@
-using System.Collections.Generic;
+using DebugBehaviour.Runtime;
 using UnityEngine;
 
 namespace DataStore.Runtime
 {
-    public class DataStoreManager : MonoBehaviour
+    public class DataStoreManager : VerboseMonoBehaviour
     {
 
         //user settings
         private static readonly UserDataRepository userDatastore = new();
-        private static DataStore test;
-        private readonly List<KeyValuePair<DataCategoryEnum, string>> repoList = new()
-{
-    new KeyValuePair<DataCategoryEnum, string>(DataCategoryEnum.Audio, "Audio"),
-    new KeyValuePair<DataCategoryEnum, string>(DataCategoryEnum.Achievements, "Achievements"),
-    new KeyValuePair<DataCategoryEnum, string>(DataCategoryEnum.Difficulty, "Difficulty"),
-    new KeyValuePair<DataCategoryEnum, string>(DataCategoryEnum.Save, "Save"),
-    new KeyValuePair<DataCategoryEnum, string>(DataCategoryEnum.Graphics,"Graphics"),
-    new KeyValuePair<DataCategoryEnum, string>(DataCategoryEnum.GameState,"GameState"),
-};
+        private static DataStore saveDataStore;
+        public DataCategoryEnum saveCategories;
+        public DataCategoryEnum userCategories;
         private void OnEnable()
         {
-            Debug.Log("Opening Data Stores");
-            test = new DataStore($"{Application.dataPath}/Save", repoList);
+            Log("Opening Data Stores");
+            saveDataStore = new DataStore($"{Application.dataPath}/Save", saveCategories);
+            saveDataStore = new DataStore($"{Application.dataPath}/UserData", userCategories);
+            saveDataStore.Set<string>(DataCategoryEnum.Player, "name", "Player");
         }
 
 
         private void OnDisable()
         {
-            Debug.Log("Saving Data Store");
-            test.Save();
+            Log("Saving Data Store");
+            saveDataStore.Save();
 
         }
     }

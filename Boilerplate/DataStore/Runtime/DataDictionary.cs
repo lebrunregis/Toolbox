@@ -1,3 +1,4 @@
+using Facts.Runtime;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,10 +16,8 @@ namespace DataStore.Runtime
             public string value;
         }
 
-#pragma warning disable 0649
         [SerializeField]
         private List<DataKeyValuePair> m_DictionaryValues = new();
-#pragma warning restore 0649
 
         internal Dictionary<Type, Dictionary<string, string>> dictionary = new();
 
@@ -41,28 +40,29 @@ namespace DataStore.Runtime
         {
             var typeValue = Type.GetType(type);
 
-            if (typeValue == null)
-                throw new ArgumentException("\"type\" must be an assembly qualified type name.");
+            if (typeValue != null)
+            {
+                if (!dictionary.TryGetValue(typeValue, out Dictionary<string, string> entries))
+                    dictionary.Add(typeValue, entries = new Dictionary<string, string>());
 
-            Dictionary<string, string> entries;
-
-            if (!dictionary.TryGetValue(typeValue, out entries))
-                dictionary.Add(typeValue, entries = new Dictionary<string, string>());
-
-            if (entries.ContainsKey(key))
-                entries[key] = value;
+                if (entries.ContainsKey(key))
+                    entries[key] = value;
+                else
+                    entries.Add(key, value);
+            }
             else
-                entries.Add(key, value);
+            {
+                throw new ArgumentException("\"type\" must be an assembly qualified type name.");
+            }
         }
 
-        public T Get<T>(string key, T fallback = default(T))
+        public T Get<T>(string key, T fallback = default)
         {
             if (string.IsNullOrEmpty(key))
                 throw new ArgumentNullException("key");
 
-            Dictionary<string, string> entries;
 
-            if (dictionary.TryGetValue(typeof(T), out entries) && entries.ContainsKey(key))
+            if (dictionary.TryGetValue(typeof(T), out Dictionary<string, string> entries) && entries.ContainsKey(key))
             {
                 try
                 {
@@ -79,9 +79,8 @@ namespace DataStore.Runtime
 
         public void Remove<T>(string key)
         {
-            Dictionary<string, string> entries;
 
-            if (!dictionary.TryGetValue(typeof(T), out entries) || !entries.ContainsKey(key))
+            if (!dictionary.TryGetValue(typeof(T), out Dictionary<string, string> entries) || !entries.ContainsKey(key))
                 return;
 
             entries.Remove(key);
@@ -119,7 +118,7 @@ namespace DataStore.Runtime
 
                 if (type == null)
                 {
-                    Debug.LogWarning("Could not instantiate type \"" + entry.type + "\". Skipping key: " + entry.key + ".");
+                    UnityEngine.Debug.LogWarning("Could not instantiate type \"" + entry.type + "\". Skipping key: " + entry.key + ".");
                     continue;
                 }
 

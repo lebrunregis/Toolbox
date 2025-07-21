@@ -1,15 +1,17 @@
+using System;
+
 namespace DataStore.Runtime
 {
+    [Flags]
     public enum DataCategoryEnum
     {
-        None,
         Save,
         Difficulty,
         Audio,
         Graphics,
         GameState,
         Achievements,
-        Runtime
-
+        Runtime,
+        Player
     }
 }

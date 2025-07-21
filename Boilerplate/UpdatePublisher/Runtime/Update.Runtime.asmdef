@@ -1,7 +1,9 @@
 {
     "name": "UpdatePublisher.Runtime",
     "rootNamespace": "UpdatePublisher.Runtime",
-    "references": [],
+    "references": [
+        "GUID:4a03ca78fbbf223419e5a3f628bbab87"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
