@@ -30,7 +30,7 @@ namespace Paint.Runtime
             }
             else
             {
-               Log("Shader not set!",this);
+                Log("Shader not set!", this);
             }
 
         }

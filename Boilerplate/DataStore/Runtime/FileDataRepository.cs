@@ -53,11 +53,14 @@ namespace DataStore.Runtime
 
         public bool TryLoadSavedJson(out string json)
         {
+            bool fileFound = false;
             json = string.Empty;
-            if (!File.Exists(Path))
-                return false;
-            json = File.ReadAllText(Path);
-            return true;
+            if (File.Exists(Path))
+            {
+                json = File.ReadAllText(Path);
+                fileFound = true;
+            }
+                return fileFound;
         }
         public void Save()
         {
