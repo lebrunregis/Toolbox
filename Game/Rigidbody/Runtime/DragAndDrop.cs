@@ -1,10 +1,11 @@
+using DebugBehaviour.Runtime;
 using Toolbox.Rigidbody.Runtime;
 using UnityEngine;
 using static UnityEngine.InputSystem.InputAction;
 
 namespace Toolbox.RigidBody.Runtime
 {
-    public class DragAndDrop : MonoBehaviour
+    public class DragAndDrop : VerboseMonoBehaviour
     {
         #region Publics
 
@@ -43,19 +44,18 @@ namespace Toolbox.RigidBody.Runtime
         private void Update()
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, pickupRange))
+            if (Physics.Raycast(ray, out RaycastHit hit, pickupRange))
             {
                 GameObject go = hit.collider.gameObject;
 
                 if (go.TryGetComponent<OutlineContainer>(out OutlineContainer OLcontainer))
                 {
                     OLcontainer.EnableOutlineWithTimer();
-                    Debug.Log("ENABLED OUTLINE");
+                    Log("ENABLED OUTLINE");
                 }
                 else
                 {
-                    Debug.Log("NO OUTLINE FOUND");
+                    Log("NO OUTLINE FOUND");
                 }
 
                 if (go.TryGetComponent<Grabable>(out Grabable grab))
@@ -124,8 +124,7 @@ namespace Toolbox.RigidBody.Runtime
         {
             Debug.Log("Trying to grab something");
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, pickupRange))
+            if (Physics.Raycast(ray, out RaycastHit hit, pickupRange))
             {
                 if (hit.rigidbody.gameObject.TryGetComponent<Grabable>(out Grabable grab))
                 {
@@ -136,7 +135,7 @@ namespace Toolbox.RigidBody.Runtime
                 }
                 else
                 {
-                    Debug.LogWarning("Tried to grab an object but it did not contain a grabable component!");
+                    Log("Tried to grab an object but it did not contain a grabable component!");
                 }
             }
         }

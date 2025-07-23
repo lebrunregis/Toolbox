@@ -1,6 +1,7 @@
+using DebugBehaviour.Runtime;
 using UnityEngine;
 
-public class Singleton<T> : DebugBehaviour.Runtime.VerboseMonoBehaviour where T : MonoBehaviour
+public class Singleton<T> : VerboseMonoBehaviour where T : MonoBehaviour
 {
     public static bool keepAlive = true;
 
@@ -35,19 +36,15 @@ public class Singleton<T> : DebugBehaviour.Runtime.VerboseMonoBehaviour where T 
         if (instance != null)
         {
             Destroy(gameObject);
-            return;
         }
-
-        instance = GetComponent<T>();
-
-        if (keepAlive)
+        else
         {
-            DontDestroyOnLoad(gameObject);
-        }
+            instance = GetComponent<T>();
 
-        if (instance == null)
-        {
-            return;
+            if (keepAlive)
+            {
+                DontDestroyOnLoad(gameObject);
+            }
         }
     }
 

@@ -1,30 +1,32 @@
 using UnityEngine;
 using UnityEngine.Rendering;
 
-public class PaintManager : Singleton<PaintManager>{
+public class PaintManager : Singleton<PaintManager>
+{
 
     public Shader texturePaint;
     public Shader extendIslands;
 
-    readonly int prepareUVID = Shader.PropertyToID("_PrepareUV");
-    readonly int positionID = Shader.PropertyToID("_PainterPosition");
-    readonly int hardnessID = Shader.PropertyToID("_Hardness");
-    readonly int strengthID = Shader.PropertyToID("_Strength");
-    readonly int radiusID = Shader.PropertyToID("_Radius");
-    readonly int blendOpID = Shader.PropertyToID("_BlendOp");
-    readonly int colorID = Shader.PropertyToID("_PainterColor");
-    readonly int textureID = Shader.PropertyToID("_MainTex");
-    readonly int uvOffsetID = Shader.PropertyToID("_OffsetUV");
-    readonly int uvIslandsID = Shader.PropertyToID("_UVIslands");
+    private readonly int prepareUVID = Shader.PropertyToID("_PrepareUV");
+    private readonly int positionID = Shader.PropertyToID("_PainterPosition");
+    private readonly int hardnessID = Shader.PropertyToID("_Hardness");
+    private readonly int strengthID = Shader.PropertyToID("_Strength");
+    private readonly int radiusID = Shader.PropertyToID("_Radius");
+    private readonly int blendOpID = Shader.PropertyToID("_BlendOp");
+    private readonly int colorID = Shader.PropertyToID("_PainterColor");
+    private readonly int textureID = Shader.PropertyToID("_MainTex");
+    private readonly int uvOffsetID = Shader.PropertyToID("_OffsetUV");
+    private readonly int uvIslandsID = Shader.PropertyToID("_UVIslands");
 
-    Material paintMaterial;
-    Material extendMaterial;
+    private Material paintMaterial;
+    private Material extendMaterial;
 
-    CommandBuffer command;
+    private CommandBuffer command;
 
-    public override void Awake(){
+    public override void Awake()
+    {
         base.Awake();
-        
+
         paintMaterial = new Material(texturePaint);
         extendMaterial = new Material(extendIslands);
         command = new CommandBuffer
@@ -33,7 +35,8 @@ public class PaintManager : Singleton<PaintManager>{
         };
     }
 
-    public void initTextures(Paintable paintable){
+    public void initTextures(Paintable paintable)
+    {
         RenderTexture mask = paintable.GetMask();
         RenderTexture uvIslands = paintable.GetUVIslands();
         RenderTexture extend = paintable.GetExtend();
@@ -53,7 +56,8 @@ public class PaintManager : Singleton<PaintManager>{
     }
 
 
-    public void Paint(Paintable paintable, Vector3 pos, float radius = 1f, float hardness = .5f, float strength = .5f, Color? color = null){
+    public void Paint(Paintable paintable, Vector3 pos, float radius = 1f, float hardness = .5f, float strength = .5f, Color? color = null)
+    {
         RenderTexture mask = paintable.GetMask();
         RenderTexture uvIslands = paintable.GetUVIslands();
         RenderTexture extend = paintable.GetExtend();

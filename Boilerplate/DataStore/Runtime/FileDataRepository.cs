@@ -60,7 +60,7 @@ namespace DataStore.Runtime
                 json = File.ReadAllText(Path);
                 fileFound = true;
             }
-                return fileFound;
+            return fileFound;
         }
         public void Save()
         {
