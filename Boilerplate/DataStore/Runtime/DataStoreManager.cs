@@ -1,5 +1,4 @@
 using DebugBehaviour.Runtime;
-using System;
 using UnityEngine;
 
 namespace DataStore.Runtime
@@ -12,9 +11,9 @@ namespace DataStore.Runtime
         private static DataStore saveDataStore;
         private static DataStore userProfileDataStore;
         private static DataStore gameDataStore;
-        public DataCategoryEnum saveCategories = DataCategoryEnum.Save;
+        public DataCategoryEnum saveCategories = DataCategoryEnum.Save | DataCategoryEnum.Player;
         public DataCategoryEnum userCategories = DataCategoryEnum.Achievements | DataCategoryEnum.Player | DataCategoryEnum.Graphics | DataCategoryEnum.Audio;
-        public DataCategoryEnum gameCategories =  DataCategoryEnum.Difficulty;
+        public DataCategoryEnum gameCategories = DataCategoryEnum.Difficulty;
         public bool saveOnClose = false;
         private void OnEnable()
         {
