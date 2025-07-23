@@ -1,59 +1,56 @@
-using DebugBehaviour.Runtime;
-using System;
 using UnityEngine;
-namespace Paint.Runtime
-{
-    public class Paintable : VerboseMonoBehaviour
-    {
 
-        [Range(5, 12)]
-        public int textureSizeExponent = 10;
-        [Header("0, 16, 24, 32 are the only supported values.")]
-        [Range(0, 32)]
-        public int textureDepth = 0;
-        [Range(0, 4)]
-        public int msaaSamplesExponent = 0;
-        public RenderTextureFormat format = RenderTextureFormat.Default;
-        public RenderTextureReadWrite readWrite = RenderTextureReadWrite.Default;
-        public FilterMode filterMode = FilterMode.Bilinear;
+public class Paintable : MonoBehaviour {
+    const int TEXTURE_SIZE = 1024;
 
-        private RenderTextureDescriptor descriptor;
+    public float extendsIslandOffset = 1;
 
-        private RenderTexture maskRenderTexture;
+    RenderTexture extendIslandsRenderTexture;
+    RenderTexture uvIslandsRenderTexture;
+    RenderTexture maskRenderTexture;
+    RenderTexture supportTexture;
+    
+    Renderer rend;
 
-        private Renderer rend;
+    private int maskTextureID = Shader.PropertyToID("_MaskTexture");
 
-        private readonly int maskTextureID = Shader.PropertyToID("_MaskTexture");
+    public RenderTexture GetMask() => maskRenderTexture;
+    public RenderTexture GetUVIslands() => uvIslandsRenderTexture;
+    public RenderTexture GetExtend() => extendIslandsRenderTexture;
+    public RenderTexture GetSupport() => supportTexture;
+    public Renderer GetRenderer() => rend;
 
-        public RenderTexture GetMask() => maskRenderTexture;
-        public Renderer GetRenderer() => rend;
-
-
-        private void Start()
+    void Start() {
+        maskRenderTexture = new RenderTexture(TEXTURE_SIZE, TEXTURE_SIZE, 0)
         {
+            filterMode = FilterMode.Bilinear
+        };
 
-            int textureSize = Toolbox.Math.Exponent.TwoPowX(textureSizeExponent);
-            int msaaSamples = Toolbox.Math.Exponent.TwoPowX(msaaSamplesExponent);
-            descriptor = new(textureSize, textureSize, format, textureDepth)
-            {
-                msaaSamples = msaaSamples
-            };
-
-            maskRenderTexture = new RenderTexture(descriptor)
-            {
-                filterMode = filterMode
-            };
-
-
-            rend = GetComponent<Renderer>();
-            rend.material.SetTexture(maskTextureID, maskRenderTexture);
-
-            PaintManager.Instance.InitTextures(this);
-        }
-
-        private void OnDisable()
+        extendIslandsRenderTexture = new RenderTexture(TEXTURE_SIZE, TEXTURE_SIZE, 0)
         {
-            maskRenderTexture.Release();
-        }
+            filterMode = FilterMode.Bilinear
+        };
+
+        uvIslandsRenderTexture = new RenderTexture(TEXTURE_SIZE, TEXTURE_SIZE, 0)
+        {
+            filterMode = FilterMode.Bilinear
+        };
+
+        supportTexture = new RenderTexture(TEXTURE_SIZE, TEXTURE_SIZE, 0)
+        {
+            filterMode = FilterMode.Bilinear
+        };
+
+        rend = GetComponent<Renderer>();
+        rend.material.SetTexture(maskTextureID, extendIslandsRenderTexture);
+
+        PaintManager.Instance.initTextures(this);
+    }
+
+    void OnDisable(){
+        maskRenderTexture.Release();
+        uvIslandsRenderTexture.Release();
+        extendIslandsRenderTexture.Release();
+        supportTexture.Release();
     }
 }
