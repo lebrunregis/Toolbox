@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -6,6 +7,7 @@ public class PaintManager : Singleton<PaintManager>
 
     public Shader texturePaint;
     public Shader extendIslands;
+    public Shader paintable;
 
     private readonly int prepareUVID = Shader.PropertyToID("_PrepareUV");
     private readonly int positionID = Shader.PropertyToID("_PainterPosition");
@@ -35,7 +37,7 @@ public class PaintManager : Singleton<PaintManager>
         };
     }
 
-    public void initTextures(Paintable paintable)
+    public void InitTextures(Paintable paintable)
     {
         RenderTexture mask = paintable.GetMask();
         RenderTexture uvIslands = paintable.GetUVIslands();
@@ -87,4 +89,8 @@ public class PaintManager : Singleton<PaintManager>
         command.Clear();
     }
 
+    internal void MakePaintable(Collider collider)
+    {
+        Paintable p = collider.gameObject.AddComponent(typeof(Paintable)) as Paintable;
+    }
 }

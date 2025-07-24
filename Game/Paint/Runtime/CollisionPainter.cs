@@ -1,6 +1,7 @@
+using DebugBehaviour.Runtime;
 using UnityEngine;
 
-public class CollisionPainter : MonoBehaviour
+public class CollisionPainter : VerboseMonoBehaviour
 {
     public Color paintColor;
 
@@ -10,9 +11,9 @@ public class CollisionPainter : MonoBehaviour
 
     private void OnCollisionStay(Collision other)
     {
-        Paintable p = other.collider.GetComponent<Paintable>();
-        if (p != null)
+        if (other.collider.TryGetComponent<Paintable>(out var p))
         {
+            Log("OnCollisionPainting");
             Vector3 pos = other.contacts[0].point;
             PaintManager.Instance.Paint(p, pos, radius, hardness, strength, paintColor);
         }

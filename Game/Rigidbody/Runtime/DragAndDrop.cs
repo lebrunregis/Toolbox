@@ -120,6 +120,7 @@ namespace Toolbox.RigidBody.Runtime
                 OnGrabButtonReleased();
             }
         }
+
         private void OnGrabButtonPressed()
         {
             Debug.Log("Trying to grab something");

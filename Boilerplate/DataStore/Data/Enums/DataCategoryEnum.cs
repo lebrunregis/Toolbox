@@ -5,7 +5,6 @@ namespace DataStore.Runtime
     [Flags]
     public enum DataCategoryEnum
     {
-        None = 0,
         Save = 1 << 0,
         Difficulty = 1 << 1,
         Audio = 1 << 2,

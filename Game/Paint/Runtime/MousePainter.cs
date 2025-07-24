@@ -1,5 +1,7 @@
+using System;
 using DebugBehaviour.Runtime;
 using UnityEngine;
+using static UnityEngine.InputSystem.InputAction;
 
 public class MousePainter : VerboseMonoBehaviour
 {
@@ -16,28 +18,57 @@ public class MousePainter : VerboseMonoBehaviour
 
     private bool click = false;
 
-    private void OnMouseOver()
+    private void FixedUpdate()
     {
         if (click)
         {
-            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out RaycastHit hit, drawRange))
+            Paint();
+        }
+    }
+
+    private void Paint()
+    {
+        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out RaycastHit hit, drawRange))
+        {
+            DrawRay(ray.origin, hit.point - ray.origin, paintColor);
+            if (hit.collider.TryGetComponent<Paintable>(out var p))
             {
-                DrawRay(ray.origin, hit.point - ray.origin, paintColor);
-                if (hit.collider.TryGetComponent<Paintable>(out var p))
-                {
-                    PaintManager.Instance.Paint(p, hit.point, radius, hardness, strength, paintColor);
-                }
+                PaintManager.Instance.Paint(p, hit.point, radius, hardness, strength, paintColor);
+            } else
+            {
+                PaintManager.Instance.MakePaintable(hit.collider);
             }
         }
     }
 
-    private void OnMouseDown()
+    public void OnPaint(CallbackContext context)
     {
-        click = true;
+        Debug.Log("Painting");
+        if (context.performed == true)
+        {
+            OnPaintButtonPressed();
+        }
+        else if (context.canceled == true)
+        {
+            OnPaintButtonReleased();
+        }
     }
 
-    private void OnMouseUp()
+    public void OnPaintButtonPressed()
+    {
+        if (mouseSingleClick)
+        {
+            Log("SingleClickPainting");
+            Paint();
+        }
+        else
+        {
+            click = true;
+        }
+    }
+
+    public void OnPaintButtonReleased()
     {
         click = false;
     }

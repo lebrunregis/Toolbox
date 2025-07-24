@@ -1,6 +1,6 @@
-using DataStore.Data;
 using System;
 using System.Collections.Generic;
+using DataStore.Data;
 using UnityEngine;
 
 namespace DataStore.Runtime
@@ -95,7 +95,7 @@ namespace DataStore.Runtime
                     return repo.ContainsKey<T>(key);
             }
 
-            UnityEngine.Debug.LogWarning($"No repository with type {typeof(K)} found.");
+            Debug.LogWarning($"No repository with type {typeof(K)} found.");
             return false;
         }
 
@@ -127,7 +127,7 @@ namespace DataStore.Runtime
             }
 
             if (!foundScopeRepository)
-                UnityEngine.Debug.LogWarning($"No repository with type {typeof(K)} found.");
+                Debug.LogWarning($"No repository with type {typeof(K)} found.");
         }
     }
 }

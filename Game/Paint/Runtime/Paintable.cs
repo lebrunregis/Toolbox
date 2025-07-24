@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class Paintable : MonoBehaviour
 {
-    private const int TEXTURE_SIZE = 1024;
+    public int tex_powOfTwo = 10;
+    public FilterMode filterMode = FilterMode.Bilinear;
 
     public float extendsIslandOffset = 1;
 
@@ -23,30 +24,31 @@ public class Paintable : MonoBehaviour
 
     private void Start()
     {
-        maskRenderTexture = new RenderTexture(TEXTURE_SIZE, TEXTURE_SIZE, 0)
+        int textureSize = Toolbox.Math.Exponent.TwoPowX(tex_powOfTwo);
+        maskRenderTexture = new RenderTexture(textureSize, textureSize, 0)
         {
-            filterMode = FilterMode.Bilinear
+            filterMode = filterMode
         };
 
-        extendIslandsRenderTexture = new RenderTexture(TEXTURE_SIZE, TEXTURE_SIZE, 0)
+        extendIslandsRenderTexture = new RenderTexture(textureSize, textureSize, 0)
         {
-            filterMode = FilterMode.Bilinear
+            filterMode = filterMode
         };
 
-        uvIslandsRenderTexture = new RenderTexture(TEXTURE_SIZE, TEXTURE_SIZE, 0)
+        uvIslandsRenderTexture = new RenderTexture(textureSize, textureSize, 0)
         {
-            filterMode = FilterMode.Bilinear
+            filterMode = filterMode
         };
 
-        supportTexture = new RenderTexture(TEXTURE_SIZE, TEXTURE_SIZE, 0)
+        supportTexture = new RenderTexture(textureSize, textureSize, 0)
         {
-            filterMode = FilterMode.Bilinear
+            filterMode = filterMode
         };
 
         rend = GetComponent<Renderer>();
         rend.material.SetTexture(maskTextureID, extendIslandsRenderTexture);
 
-        PaintManager.Instance.initTextures(this);
+        PaintManager.Instance.InitTextures(this);
     }
 
     private void OnDisable()

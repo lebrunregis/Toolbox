@@ -1,5 +1,5 @@
-using PrimeTween;
 using System.Collections.Generic;
+using PrimeTween;
 using UnityEngine;
 
 [RequireComponent(typeof(GhostTimeline))]
