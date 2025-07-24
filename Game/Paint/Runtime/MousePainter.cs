@@ -1,4 +1,3 @@
-using System;
 using DebugBehaviour.Runtime;
 using UnityEngine;
 using static UnityEngine.InputSystem.InputAction;
@@ -9,12 +8,12 @@ public class MousePainter : VerboseMonoBehaviour
     [Space]
     public bool mouseSingleClick;
     [Space]
-    public Color paintColor;
+    public Color paintColor = Color.yellow;
 
-    public float radius = 1;
+    public float radius = 0.1f;
     public float strength = 1;
     public float hardness = 1;
-    public float drawRange = 100f;
+    public float drawRange = 10f;
 
     private bool click = false;
 
@@ -35,7 +34,8 @@ public class MousePainter : VerboseMonoBehaviour
             if (hit.collider.TryGetComponent<Paintable>(out var p))
             {
                 PaintManager.Instance.Paint(p, hit.point, radius, hardness, strength, paintColor);
-            } else
+            }
+            else
             {
                 PaintManager.Instance.MakePaintable(hit.collider);
             }

@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -28,7 +27,6 @@ public class PaintManager : Singleton<PaintManager>
     public override void Awake()
     {
         base.Awake();
-
         paintMaterial = new Material(texturePaint);
         extendMaterial = new Material(extendIslands);
         command = new CommandBuffer
@@ -92,5 +90,22 @@ public class PaintManager : Singleton<PaintManager>
     internal void MakePaintable(Collider collider)
     {
         Paintable p = collider.gameObject.AddComponent(typeof(Paintable)) as Paintable;
+        Renderer rend = p.GetRenderer();
+        if (rend != null)
+        {
+            if (rend.material != null)
+            {
+                rend.material.shader = paintable;
+            }
+            else
+            {
+                Log("MATERIAL NOT FOUND");
+            }
+
+        }
+        else
+        {
+            Log("RENDERER NOT FOUND");
+        }
     }
 }
