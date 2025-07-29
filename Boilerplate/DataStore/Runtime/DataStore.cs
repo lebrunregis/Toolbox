@@ -1,6 +1,6 @@
+using DataStore.Data;
 using System;
 using System.Collections.Generic;
-using DataStore.Data;
 using UnityEngine;
 
 namespace DataStore.Runtime

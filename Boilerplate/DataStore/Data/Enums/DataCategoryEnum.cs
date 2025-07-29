@@ -1,6 +1,6 @@
 using System;
 
-namespace DataStore.Runtime
+namespace DataStore.Data
 {
     [Flags]
     public enum DataCategoryEnum
