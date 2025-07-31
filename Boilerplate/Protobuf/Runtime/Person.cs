@@ -1,6 +1,6 @@
 
-using System.IO;
 using ProtoBuf;
+using System.IO;
 
 public class PersonSerializer
 {
