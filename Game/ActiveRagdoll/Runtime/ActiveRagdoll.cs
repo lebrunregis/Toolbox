@@ -1,55 +1,25 @@
-using DebugBehaviour.Runtime;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace ActiveRagdoll.Runtime
 {
-    public class ActiveRagdoll : VerboseMonoBehaviour
+    public class ActiveRagdoll : MonoBehaviour
     {
         public int solverIterations = 8;
         public int solverVelocityIterations = 8;
         public float maxAngularVelocity = 20f;
         public GameObject animatedBody;
         public GameObject physicsBody;
+        public Rigidbody playerRootRb;
         private readonly Dictionary<String, Transform> animatedTransformsDictionary = new();
-        private readonly Dictionary<String, ConfigurableJoint> configurableJointDictionary = new();
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         private void Start()
         {
-
             SetupAnimatedBody();
             SetupPhysicsBody();
             SetupJoints();
-        }
-
-        private void Update()
-        {
-            foreach (ConfigurableJoint j in configurableJointDictionary.Values)
-            {
-                j.targetRotation = transform.rotation;
-            }
-        }
-
-        private void SetupJoints()
-        {
-            Transform[] animatedTransforms = animatedBody.GetComponentsInChildren<Transform>();
-            Transform[] physicsTransforms = physicsBody.GetComponentsInChildren<Transform>();
-           
-            foreach (Transform t in animatedTransforms)
-            {
-                animatedTransformsDictionary.Add(t.gameObject.name, t);
-            }
-            ConfigurableJoint joint;
-            foreach (Transform t in physicsTransforms)
-            {
-                GameObject gameObject = t.gameObject;
-                if (animatedTransformsDictionary.ContainsKey(gameObject.name))
-                {
-                    joint = gameObject.AddComponent<ConfigurableJoint>();
-                    configurableJointDictionary.Add(gameObject.name, joint);
-                }
-            }
+            animatedTransformsDictionary.Clear();
         }
 
         private void SetupAnimatedBody()
@@ -64,7 +34,11 @@ namespace ActiveRagdoll.Runtime
             {
                 renderer.enabled = false;
             }
-
+            Transform[] transforms = animatedBody.GetComponentsInChildren<Transform>();
+            foreach (Transform t in transforms)
+            {
+                animatedTransformsDictionary[t.name] = t;
+            }
         }
 
         private void SetupPhysicsBody()
@@ -72,11 +46,53 @@ namespace ActiveRagdoll.Runtime
             Rigidbody[] rigidbodies = physicsBody.GetComponentsInChildren<Rigidbody>();
             foreach (Rigidbody rb in rigidbodies)
             {
+                Debug.Log("RigidBody found " + rb.name);
                 rb.solverIterations = solverIterations;
                 rb.solverVelocityIterations = solverVelocityIterations;
                 rb.maxAngularVelocity = maxAngularVelocity;
+                rb.useGravity = true;
+                rb.mass = 1;
             }
         }
 
+        private void SetupJoints()
+        {
+            RecursiveJointSetup(physicsBody);
+        }
+
+        private void RecursiveJointSetup(GameObject parent, Rigidbody lastRb = null)
+        {
+            if (parent.transform.childCount > 0)
+            {
+                foreach (Transform child in parent.transform)
+                {
+                    if (child.TryGetComponent<Rigidbody>(out Rigidbody rb))
+                    {
+                        rb.useGravity = true;
+                        ConfigurableJoinExtended joint;
+                        if (animatedTransformsDictionary.ContainsKey(child.gameObject.name))
+                        {
+                            joint = child.gameObject.AddComponent<ConfigurableJoinExtended>();
+                            if (lastRb != null)
+                            {
+                                joint.Initialize(animatedTransformsDictionary[child.gameObject.name].gameObject, lastRb);
+                            }
+                            else
+                            {
+                                rb.constraints = RigidbodyConstraints.FreezeAll;
+                                joint.Initialize(animatedTransformsDictionary[child.gameObject.name].gameObject, playerRootRb);
+                            }
+                            Debug.Log("Configurable Join Added");
+
+                        }
+                        RecursiveJointSetup(child.gameObject, rb);
+                    }
+                    else
+                    {
+                        RecursiveJointSetup(child.gameObject, lastRb);
+                    }
+                }
+            }
+        }
     }
 }
