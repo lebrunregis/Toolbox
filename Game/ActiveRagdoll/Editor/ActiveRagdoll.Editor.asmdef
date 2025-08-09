@@ -1,1 +1,18 @@
-{"name":"ActiveRagdoll.Editor","rootNamespace":"ActiveRagdoll.Editor","references":[],"includePlatforms":["Editor"]}
+{
+    "name": "ActiveRagdoll.Editor",
+    "rootNamespace": "ActiveRagdoll.Editor",
+    "references": [
+        "GUID:6f93e3644c1dc384ebd5a1a57bab0a0f"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

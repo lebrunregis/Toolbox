@@ -64,15 +64,16 @@ namespace ActiveRagdoll.Runtime
         {
             if (parent.transform.childCount > 0)
             {
-                foreach (Transform child in parent.transform)
+                for (int i=0; i< parent.transform.childCount; i++)
                 {
+                    Transform child = parent.transform.GetChild(i);
                     if (child.TryGetComponent<Rigidbody>(out Rigidbody rb))
                     {
                         rb.useGravity = true;
-                        ConfigurableJoinExtended joint;
+                        ConfigurableJointExtended joint;
                         if (animatedTransformsDictionary.ContainsKey(child.gameObject.name))
                         {
-                            joint = child.gameObject.AddComponent<ConfigurableJoinExtended>();
+                            joint = child.gameObject.AddComponent<ConfigurableJointExtended>();
                             if (lastRb != null)
                             {
                                 joint.Initialize(animatedTransformsDictionary[child.gameObject.name].gameObject, lastRb);

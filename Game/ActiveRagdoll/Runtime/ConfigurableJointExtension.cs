@@ -76,10 +76,6 @@ namespace ActiveRagdoll.Runtime
             joint.breakTorque = Mathf.Infinity;
             joint.rotationDriveMode = RotationDriveMode.Slerp;
             joint.projectionMode = JointProjectionMode.PositionAndRotation;
-            JointDrive slerpDrive = joint.slerpDrive;
-            slerpDrive.maximumForce = Mathf.Infinity;
-
-            joint.slerpDrive = slerpDrive;
         }
     }
 }
