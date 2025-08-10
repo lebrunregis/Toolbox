@@ -1,0 +1,16 @@
+{
+    "name": "PlayerStateAnimator.Runtime",
+    "rootNamespace": "PlayerStateAnimator.Runtime",
+    "references": [
+        "GUID:1be3f4c84f734754cad3768091989775"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

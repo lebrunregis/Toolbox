@@ -34,7 +34,7 @@ namespace ActiveRagdoll.Runtime
         {
             target = targetObject;
             parentTransform = transform.parent;
-            initialLocalRotation = transform.localRotation;  
+            initialLocalRotation = transform.localRotation;
             joint = GetComponent<ConfigurableJoint>();
             ConfigurableJointUtility.SetupAsCharacterJoint(joint);
             joint.connectedBody = connectedBody;

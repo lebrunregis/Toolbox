@@ -64,7 +64,7 @@ namespace ActiveRagdoll.Runtime
         {
             if (parent.transform.childCount > 0)
             {
-                for (int i=0; i< parent.transform.childCount; i++)
+                for (int i = 0; i < parent.transform.childCount; i++)
                 {
                     Transform child = parent.transform.GetChild(i);
                     if (child.TryGetComponent<Rigidbody>(out Rigidbody rb))

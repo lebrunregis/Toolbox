@@ -157,8 +157,8 @@ namespace ActiveRagdoll.Editor
                 {
                     Transform child = parent.transform.GetChild(i);
                     if (child.TryGetComponent<Rigidbody>(out Rigidbody rb))
-                    
-                        {
+
+                    {
                         Undo.RecordObject(rb, "Configure Rigidbody");
                         rb.useGravity = true;
                         rb.mass = defaultMass;
@@ -179,7 +179,8 @@ namespace ActiveRagdoll.Editor
                             jointsAdded++;
                         }
                         RecursiveJointSetup(child.gameObject, rb);
-                    } else
+                    }
+                    else
                     {
                         RecursiveJointSetup(child.gameObject, lastRb);
                     }

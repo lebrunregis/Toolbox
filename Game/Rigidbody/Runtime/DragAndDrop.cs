@@ -47,16 +47,7 @@ namespace Toolbox.RigidBody.Runtime
             if (Physics.Raycast(ray, out RaycastHit hit, pickupRange))
             {
                 GameObject go = hit.collider.gameObject;
-
-                if (go.TryGetComponent<OutlineContainer>(out OutlineContainer OLcontainer))
-                {
-                    OLcontainer.EnableOutlineWithTimer();
-                    Log("ENABLED OUTLINE");
-                }
-                else
-                {
-                    Log("NO OUTLINE FOUND");
-                }
+                SetOutLine(go);
 
                 if (go.TryGetComponent<Grabable>(out Grabable grab))
                 {
@@ -73,9 +64,16 @@ namespace Toolbox.RigidBody.Runtime
             }
         }
 
-        private void SetOutLine()
+        private void SetOutLine(GameObject go)
         {
-
+            if (go.TryGetComponent<OutlineContainer>(out OutlineContainer OLcontainer))
+            {
+                OLcontainer.EnableOutlineWithTimer();
+            }
+            else
+            {
+                Log("NO OUTLINE FOUND");
+            }
         }
 
         private void SetCursorState(CursorStates state)
@@ -110,9 +108,10 @@ namespace Toolbox.RigidBody.Runtime
         #region Main Methods
         public void OnGrab(CallbackContext context)
         {
-            Debug.Log("Grabbed object");
+
             if (context.performed == true)
             {
+                Debug.Log("Grabbed object");
                 OnGrabButtonPressed();
             }
             else if (context.canceled == true)
