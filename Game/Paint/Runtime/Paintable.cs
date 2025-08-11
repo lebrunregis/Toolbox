@@ -14,7 +14,8 @@ public class Paintable : VerboseMonoBehaviour
     private RenderTexture mask;
     private RenderTexture support;
 
-    private Renderer rend;
+    private Renderer objectRenderer;
+    private SkinnedMeshRenderer skinnedMeshRenderer;
 
     private readonly int mainTextureID = Shader.PropertyToID("_BaseMap");
     private readonly int maskTextureID = Shader.PropertyToID("_PaintMask");
@@ -23,7 +24,8 @@ public class Paintable : VerboseMonoBehaviour
     public RenderTexture GetUVIslands() => uvIslands;
     public RenderTexture GetExtend() => extendIslands;
     public RenderTexture GetSupport() => support;
-    public Renderer GetRenderer() => rend;
+    public Renderer GetRenderer() => objectRenderer;
+    public SkinnedMeshRenderer GetSkinnedMeshRenderer() => skinnedMeshRenderer;
 
     private void Start()
     {
@@ -66,8 +68,9 @@ public class Paintable : VerboseMonoBehaviour
             filterMode = filterMode
         };
 
-        rend = GetComponent<Renderer>();
-        rend.material.SetTexture(maskTextureID, mask);
+        objectRenderer = GetComponent<Renderer>();
+        skinnedMeshRenderer = GetComponent<SkinnedMeshRenderer>();
+        objectRenderer.material.SetTexture(maskTextureID, mask);
 
         PaintManager.Instance.InitTextures(this);
     }

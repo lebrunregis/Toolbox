@@ -70,7 +70,7 @@ public class PaintManager : Singleton<PaintManager>
         paintMaterial.SetFloat(strengthID, strength);
         paintMaterial.SetFloat(radiusID, radius);
         paintMaterial.SetTexture(textureID, support);
-        paintMaterial.SetColor(colorID, color ?? Color.red);
+        paintMaterial.SetColor(colorID, color ?? Color.magenta);
         extendMaterial.SetFloat(uvOffsetID, paintable.extendsIslandOffset);
         extendMaterial.SetTexture(uvIslandsID, uvIslands);
 
@@ -91,19 +91,28 @@ public class PaintManager : Singleton<PaintManager>
     {
         Paintable p = collider.gameObject.AddComponent(typeof(Paintable)) as Paintable;
         Renderer rend = p.GetRenderer();
+        SkinnedMeshRenderer meshRenderer = p.GetSkinnedMeshRenderer();
         if (rend != null)
         {
             if (rend.material != null)
             {
-                rend.material.shader = paintable;
+                Material material = rend.material;
+                material.shader = paintable;
+                rend.material = material;
             }
             else
             {
-                Log("MATERIAL NOT FOUND");
+                Log("RENDERER MATERIAL NOT FOUND");
             }
 
         }
-        else
+        else if (meshRenderer != null)
+        {
+            for (int i = 0; i < meshRenderer.materials.Length; i++)
+            {
+                meshRenderer.materials[i].shader = paintable;
+            }
+        } else
         {
             Log("RENDERER NOT FOUND");
         }
