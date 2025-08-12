@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Tools
+namespace Toolbox
 {
     public class Repeater : MonoBehaviour
     {
