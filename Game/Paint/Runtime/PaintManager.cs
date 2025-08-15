@@ -112,7 +112,8 @@ public class PaintManager : Singleton<PaintManager>
             {
                 meshRenderer.materials[i].shader = paintable;
             }
-        } else
+        }
+        else
         {
             Log("RENDERER NOT FOUND");
         }
